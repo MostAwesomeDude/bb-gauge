@@ -1,0 +1,10 @@
+[book]
+authors = ["Corbin"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Busy Beaver Gauge"
+
+[output.html]
+
+[output.linkcheck]
