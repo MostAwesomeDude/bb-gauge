@@ -1,5 +1,5 @@
 {
-  description = "Lojban notes";
+  description = "Computed Busy Beaver gauge";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
@@ -24,16 +24,15 @@
           src = ./.;
 
           buildInputs = with pkgs; [
-            py
+            py jq
             mdbook mdbook-linkcheck
             # mdbook-graphviz
           ];
 
           buildPhase = ''
-            for nql in ${mm-tm}/*.nql; do
-              states=$(${py}/bin/python3 ${mm-tm}/nqlaconic.py --print-tm $nql | wc -l)
-              echo "NQL $nql has $states states"
-              echo "$(basename $nql) | $states" >> src/turing-steps.md
+            for nql in $(<nql.json jq -r 'keys | join(" ")'); do
+              states=$(${py}/bin/python3 ${mm-tm}/nqlaconic.py --print-tm ${mm-tm}/$nql | wc -l)
+              echo "$nql | $states" >> src/turing-steps.md
             done
             mdbook build
           '';

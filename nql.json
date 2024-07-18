@@ -1,0 +1,7 @@
+{
+    "goldbach.nql": "Goldbach conjecture",
+    "riemann-matiyasevich-aaronson.nql": "Riemann hypothesis",
+    "riemann.nql": "Riemann hypothesis",
+    "zf.nql": "Con(ZF)",
+    "zf2.nql": "Con(ZF)"
+}
