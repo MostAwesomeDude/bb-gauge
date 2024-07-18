@@ -1,7 +1,22 @@
 {
-    "goldbach.nql": "Goldbach conjecture",
-    "riemann-matiyasevich-aaronson.nql": "Riemann hypothesis",
-    "riemann.nql": "Riemann hypothesis",
-    "zf.nql": "Con(ZF)",
-    "zf2.nql": "Con(ZF)"
+    "goldbach.nql": {
+        "problem": "Goldbach conjecture",
+        "source": "O'Rear 2016"
+    },
+    "riemann-matiyasevich-aaronson.nql": {
+        "problem": "Riemann hypothesis",
+        "source": "Aaronson & Matiyasevich 2016"
+    },
+    "riemann.nql": {
+        "problem": "Riemann hypothesis",
+        "source": "O'Rear 2016"
+    },
+    "zf.nql": {
+        "problem": "Con(ZF)",
+        "source": "O'Rear 2016"
+    },
+    "zf2.nql": {
+        "problem": "Con(ZF)",
+        "source": "O'Rear 2016"
+    }
 }

@@ -15,6 +15,29 @@
           rev = "530d5450cbf0fe7d0d104ec0f0ab037857e8a49c";
           sha256 = "sha256-k3QzWkBrE3/06rqCcEOvOfxHjcGrIB7hXHPMc9e/vlw=";
         };
+        ghc = pkgs.haskellPackages.ghcWithPackages (ps: [ ps.dlist ]);
+        ait = pkgs.stdenv.mkDerivation {
+          name = "ait";
+          version = "2024";
+
+          src = pkgs.fetchFromGitHub {
+            owner = "tromp";
+            repo = "AIT";
+            rev = "c4423db370320179342b8dd2ea8a484b7a127246";
+            sha256 = "sha256-3wvWQjk9W8FIb4UUVQeStOhTnYcb+DikmDxQPt9Ffgs=";
+          };
+
+          buildInputs = [ ghc ];
+
+          buildPhase = ''
+            make blc
+          '';
+
+          installPhase = ''
+            mkdir -p $out/bin/
+            cp blc $out/bin/
+          '';
+        };
         # XXX pypy doesn't work with pyparsing?
         py = pkgs.python3.withPackages (ps: [ ps.pyparsing ]);
         bb-gauge = pkgs.stdenv.mkDerivation {
@@ -24,12 +47,16 @@
           src = ./.;
 
           buildInputs = with pkgs; [
-            py jq
+            py jq ait
             mdbook mdbook-linkcheck
             # mdbook-graphviz
           ];
 
           buildPhase = ''
+            for lam in $(<blc.json jq -r 'keys | join(" ")'); do
+              len=$(${ait}/bin/blc size ${ait.src}/fast_growing_and_conjectures/$lam)
+              echo "$lam | $len" >> src/blc-length.md
+            done
             for nql in $(<nql.json jq -r 'keys | join(" ")'); do
               states=$(${py}/bin/python3 ${mm-tm}/nqlaconic.py --print-tm ${mm-tm}/$nql | wc -l)
               echo "$nql | $states" >> src/turing-steps.md

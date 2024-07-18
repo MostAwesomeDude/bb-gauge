@@ -5,5 +5,5 @@ counts the maximum number of steps a Turing machine may take before halting.
 
 ## NQL
 
-NQL File | Number of states
+NQL file | Number of states
 ---|---

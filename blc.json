@@ -1,0 +1,22 @@
+{
+    "goldbach.lam": {
+        "problem": "Goodbach's conjecture",
+        "source": "Felgenhauer 2013"
+    },
+    "goodstein.lam": {
+        "problem": "Goodstein's theorem",
+        "source": "Felgenhauer 2014"
+    },
+    "laver.lam": {
+        "problem": "Period 32 Laver table",
+        "source": "Tromp 2016"
+    },
+    "oddperfect.lam": {
+        "problem": "Odd perfect number",
+        "source": "Tromp 2020"
+    },
+    "perfect.lam": {
+        "problem": "Odd perfect number",
+        "source": "Felgenhauer 2020"
+    }
+}
