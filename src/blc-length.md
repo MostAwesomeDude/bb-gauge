@@ -6,7 +6,11 @@ largest normal form of any normalizing closed lambda term of size n, where the
 size of a term is computed via its encoding in
 [BLC](https://esolangs.org/wiki/Binary_lambda_calculus).
 
+## Known Values
+
+BBλ is known up to BBλ(36).
+
 ## BLC
 
-BLC file | Number of bits
+BLC file | BBλ(n)
 ---|---
