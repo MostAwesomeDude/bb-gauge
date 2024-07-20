@@ -6,6 +6,10 @@
 
 - [Steps](./turing-steps.md)
 
-# Binary Lambda Calculus
+# Lambda Calculus
 
 - [Length](./blc-length.md)
+
+# Brainfuck
+
+- [Steps](./bf-steps.md)

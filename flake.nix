@@ -38,6 +38,24 @@
             cp blc $out/bin/
           '';
         };
+        perl = pkgs.perl.withPackages (ps: [ ps.DataDumper ]);
+        bfmacro = pkgs.stdenv.mkDerivation {
+          name = "bfmacro";
+          version = "2005";
+
+          src = builtins.fetchurl {
+            url = "https://www.cs.tufts.edu/~couch/bfmacro/bfmacro/bfmacro";
+            sha256 = "0dwlh3h58zv4slvv6cana6vgr9mgwln8y2227vj7r1n20agd3h3g";
+          };
+
+          dontUnpack = true;
+
+          installPhase = ''
+            mkdir -p $out/bin/
+            echo "#!${perl}/bin/perl" | cat - $src > $out/bin/bfmacro
+            chmod +x $out/bin/bfmacro
+          '';
+        };
         # XXX pypy doesn't work with pyparsing?
         py = pkgs.python3.withPackages (ps: [ ps.pyparsing ]);
         bb-gauge = pkgs.stdenv.mkDerivation {
@@ -47,7 +65,7 @@
           src = ./.;
 
           buildInputs = with pkgs; [
-            py jq ait
+            py jq ait bfmacro
             mdbook mdbook-linkcheck
             # mdbook-graphviz
           ];

@@ -17,7 +17,8 @@ BB(n,k)      | 2 symbols  | 3  | 4
 **5**        | 47,176,870 |    |
 
 This table is tight in the sense that all unknown cells are bounded by the
-hardest open problems in mathematics.
+hardest open problems in mathematics, known as
+[cryptids](https://wiki.bbchallenge.org/wiki/Cryptids).
 
 ## NQL
 
