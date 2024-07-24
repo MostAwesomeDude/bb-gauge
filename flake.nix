@@ -55,6 +55,8 @@
             echo "#!${perl}/bin/perl" | cat - $src > $out/bin/bfmacro
             chmod +x $out/bin/bfmacro
           '';
+
+          meta.license = pkgs.lib.licenses.gpl2Plus;
         };
         # XXX pypy doesn't work with pyparsing?
         py = pkgs.python3.withPackages (ps: [ ps.pyparsing ]);
