@@ -31,15 +31,15 @@ initial tape to the symbol count: we treat them as shorthand for machines
 which use one state per symbol to write the initial tape before jumping to
 their main algorithm.
 
-Morphett file | BB(n,k)
----|---
-catalan-mersenne.tm | 27 + 2, 4
-fermat-prime.tm     | 31 + 9, 4
-goldbach-ternary.tm | 79, 13
-goldbach.tm         | 54, 4
-legendre.tm         | 30 + 9, 4
-odd-perfect.tm      | 79, 13
-polya.tm            | 37, 6
+Morphett file | Problem | BB(n,k)
+---|---|---
+catalan-mersenne.tm | Catalan–Mersenne conjecture | 27 + 2, 4
+fermat-prime.tm     | Fermat prime conjecture     | 31 + 9, 4
+goldbach-ternary.tm | Weak Goldbach conjecture    | 79, 13
+goldbach.tm         | Goldbach conjecture         | 54, 4
+legendre.tm         | Legendre conjecture         | 30 + 9, 4
+odd-perfect.tm      | Odd perfect number          | 79, 13
+polya.tm            | Pólya's problem             | 37, 6
 
 ## NQL
 

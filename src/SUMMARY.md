@@ -1,6 +1,7 @@
-# Summary
+# Busy Beaver Gauge
 
 - [Introduction](./intro.md)
+- [Problems](./problems.md)
 
 # Turing Machines
 

@@ -1,6 +1,6 @@
 {
     "goldbach.lam": {
-        "problem": "Goodbach's conjecture",
+        "problem": "Goldbach conjecture",
         "source": "Felgenhauer 2013"
     },
     "goodstein.lam": {
