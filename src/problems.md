@@ -57,10 +57,6 @@ powers of three; is any *k*'th power of two expressible in ternary with only
 the digits 0 and 1? Erdős conjectured that there is no such *k* and Lagarias
 studied the problem in [Lagarias 2005](https://arxiv.org/abs/math/0512006).
 
-This problem is also called the ternary digit problem. It is equivalent to an
-earlier conjecture of Erdős, Graham, Rusza, & Straus: Let *n* > 4; is any
-binomial coefficient Choose(2*n*,*n*) square-free?
-
 ### Fermat prime conjecture
 
 Is there a sixth Fermat prime? Fermat conjectured that all Fermat numbers are
