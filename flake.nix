@@ -73,14 +73,14 @@
           ];
 
           buildPhase = ''
-            for lam in $(<blc.json jq -r 'keys | join(" ")'); do
-              len=$(${ait}/bin/blc size ${ait.src}/fast_growing_and_conjectures/$lam)
-              echo "$lam | $len" >> src/blc-length.md
-            done
-            for nql in $(<nql.json jq -r 'keys | join(" ")'); do
-              states=$(${py}/bin/python3 ${mm-tm}/nqlaconic.py --print-tm ${mm-tm}/$nql | wc -l)
-              echo "$nql | $states" >> src/turing-steps.md
-            done
+            ${py}/bin/python3 gen.py 'BBλ(n)' blc.json \
+              ${ait}/bin/blc size ${ait.src}/fast_growing_and_conjectures/ \
+              > src/blc.md
+
+            ${py}/bin/python3 gen.py 'BB(n,2)' nql.json \
+              ${py}/bin/python3 ${mm-tm}/nqlaconic.py --print-tm ${mm-tm}/ \
+              > src/nql.md
+
             mdbook build
           '';
 

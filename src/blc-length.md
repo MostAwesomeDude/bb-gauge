@@ -12,5 +12,4 @@ BBλ is known up to BBλ(36).
 
 ## BLC
 
-BLC file | BBλ(n)
----|---
+{{#include blc.md}}

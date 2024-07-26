@@ -45,5 +45,4 @@ polya.tm            | Pólya's problem             | 37, 6
 
 NQL always compiles to 2-symbol Turing machines.
 
-NQL file | BB(n,2)
----|---
+{{#include nql.md}}
