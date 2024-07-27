@@ -101,13 +101,20 @@ A98820](https://oeis.org/A098820)? Laver showed in [Laver
 any power-of-two period, given ZFC plus the axiom that an I3 rank-into-rank
 cardinal exists.
 
-See also [WP](https://en.wikipedia.org/wiki/Laver_table).
+See also [WP](https://en.wikipedia.org/wiki/Laver_table). A collection of
+attempts at encoding this problem can be found at [Code Golf Stack
+Exchange](https://codegolf.stackexchange.com/q/79620/123693).
 
 ### Riemann hypothesis
 
-Do all zeros of Riemann's zeta function have real part 1/2? Riemann guessed
-that all zeros are real in 1859, and it is known that all zeros have real
-parts in [0,1].
+Do all non-trivial zeros of Riemann's zeta function have real part 1/2?
+Riemann guessed that all non-trivial zeros are real in 1859, and it is known
+that all non-trivial zeros have real parts in [0,1].
+
+Equivalently, as given by Robin in 1984 and explained by [Lagarias
+2001](https://arxiv.org/abs/math/0008177), let H(*n*) denote the *n*'th
+harmonic number; is the sum of divisors of *n* always smaller than H(*n*) +
+exp(H(*n*)) × ln(H(*n*))?
 
 See also [WP](https://en.wikipedia.org/wiki/Riemann_hypothesis),
 [nLab](https://ncatlab.org/nlab/show/Riemann+hypothesis).

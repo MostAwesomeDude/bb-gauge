@@ -1,22 +1,26 @@
 {
-    "goldbach.lam": {
+    "ait/goldbach.lam": {
         "problem": "Goldbach conjecture",
         "source": "Felgenhauer 2013"
     },
-    "goodstein.lam": {
+    "ait/goodstein.lam": {
         "problem": "Goodstein's theorem",
         "source": "Felgenhauer 2014"
     },
-    "laver.lam": {
+    "ait/laver.lam": {
         "problem": "Period 32 Laver table",
-        "source": "Tromp 2016"
+        "source": "Felgenhauer & Tromp 2016"
     },
-    "oddperfect.lam": {
+    "ait/oddperfect.lam": {
         "problem": "Odd perfect number",
         "source": "Tromp 2020"
     },
-    "perfect.lam": {
+    "ait/perfect.lam": {
         "problem": "Odd perfect number",
         "source": "Felgenhauer 2020"
+    },
+    "codegolf/laver.lam": {
+        "problem": "Period 32 Laver table",
+        "source": "Felgenhauer & Tromp 2016"
     }
 }

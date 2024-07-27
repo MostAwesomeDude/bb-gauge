@@ -73,8 +73,9 @@
           ];
 
           buildPhase = ''
+            cp -r ${ait.src}/fast_growing_and_conjectures/ blc/ait/
             ${py}/bin/python3 gen.py 'BBλ(n)' blc.json \
-              ${ait}/bin/blc size ${ait.src}/fast_growing_and_conjectures/ \
+              ${ait}/bin/blc size blc/ \
               > src/blc.md
 
             ${py}/bin/python3 gen.py 'BB(n,2)' nql.json \

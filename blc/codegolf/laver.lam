@@ -1,0 +1,14 @@
+-- https://codegolf.stackexchange.com/a/79624/123693
+\io. let
+  zero = \f\x. x;
+  one = \x. x;
+  two = \f\x. f (f x);
+  sixteen = (\x. x x x) two;
+  pred = \n\f\x. n (\g\h. h (g f)) (\h. x) (\x. x);
+  laver = \mx.
+    let laver = \b\a. a (\_. mx (b (laver (pred a))) zero) b
+    in laver;
+  sweet = sixteen;
+  dblp1 = \n\f\x. n f (n f (f x)); -- map n to 2*n+1
+  go2 = \mx. laver mx sweet mx (\_. mx) (go2 (dblp1 mx));
+in go2 one
