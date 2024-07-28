@@ -145,3 +145,11 @@ Theories which have been investigated include:
   interesting matters, and a lack of proof, as we normally celebrate the
   effort required to prove a statement above the effort required merely to
   state it.
+* Some conjectures are attached to those who studied or documented them,
+  rather than the original conjecturer, as in the case of Firoozbakht's
+  second conjecture. Look, they have to come from *somewhere*. We can only
+  hope that Firoozbakht is not upset.
+* It is tempting to over-generalize and define e.g. perfect numbers in terms
+  of sum-of-divisors functions which are then introduced at the top of the
+  page. However, this obscures the history of the problems, as in the case of
+  odd perfect numbers.

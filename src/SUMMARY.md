@@ -14,3 +14,7 @@
 # Brainfuck
 
 - [Steps](./bf-steps.md)
+
+# Conclusion
+
+- [Future Directions](./todo.md)
