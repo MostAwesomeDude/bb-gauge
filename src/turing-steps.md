@@ -49,3 +49,13 @@ designed by O'Rear in 2016 to compile to 2-symbol Turing machines with
 relatively small numbers of states.
 
 {{#include nql.md}}
+
+## Others
+
+These machines aren't given in a standard format.
+
+Machine | BB(n,k) | Problem | Source
+---|---|---|---
+[gist](https://gist.github.com/anonymous/a64213f391339236c2fe31f8749a0df6) | 27, 2 | Goldbach conjecture | Code Golf Addict 2016
+[gist](https://gist.github.com/jms137/cbb66fb58dde067b0bece12873fadc76) | 47, 2 | Goldbach conjecture | Showalter 2016
+[preprint](http://cheddarmonk.org/papers/laver.pdf) | 64, 2 | Period 32 Laver table | Taylor 2016
