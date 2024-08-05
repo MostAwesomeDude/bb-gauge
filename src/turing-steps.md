@@ -43,6 +43,9 @@ polya.tm            | Pólya's problem             | 37, 6
 
 ## NQL
 
-NQL always compiles to 2-symbol Turing machines.
+These machines are given in
+[NQL](https://esolangs.org/wiki/Not-Quite-Laconic), an esoteric language
+designed by O'Rear in 2016 to compile to 2-symbol Turing machines with
+relatively small numbers of states.
 
 {{#include nql.md}}
