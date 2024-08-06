@@ -58,6 +58,10 @@
 
           meta.license = pkgs.lib.licenses.gpl2Plus;
         };
+        bf-utm = builtins.fetchurl {
+          url = "http://brainfuck.org/utm.b";
+          sha256 = "1p7dk6fbn29rn9s35rkhcrggfg136dy5rkc89f0960al6ij7y5bx";
+        };
         # XXX pypy doesn't work with pyparsing?
         py = pkgs.python3.withPackages (ps: [ ps.pyparsing ]);
         bb-gauge = pkgs.stdenv.mkDerivation {
@@ -69,11 +73,13 @@
           buildInputs = with pkgs; [
             py jq ait bfmacro
             mdbook mdbook-linkcheck
-            # mdbook-graphviz
           ];
 
           buildPhase = ''
+            mkdir -p bf/
+            tr -c -d '<>+-,.\[]' < ${bf-utm} > bf/utm.b
             cp -r ${ait.src}/fast_growing_and_conjectures/ blc/ait/
+
             ${py}/bin/python3 gen.py 'BBλ(n)' blc.json \
               ${ait}/bin/blc size blc/ \
               > src/blc.md
@@ -81,6 +87,10 @@
             ${py}/bin/python3 gen.py 'BB(n,2)' nql.json \
               ${py}/bin/python3 ${mm-tm}/nqlaconic.py --print-tm ${mm-tm}/ \
               > src/nql.md
+
+            ${py}/bin/python3 gen.py 'n' bf.json \
+              ${pkgs.gawk}/bin/awk '{print length}' bf/ \
+              > src/bf.md
 
             mdbook build
           '';

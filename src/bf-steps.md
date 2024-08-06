@@ -31,3 +31,9 @@ n  | BBB(n)
 39 | ≥ 31,919,535,558
 41 | ≥ 10 ↑ (10 ↑ 28)
 63 | ≥ 255 ↑↑ 2
+
+### Universality
+
+Universality is known at the following values of n:
+
+{{#include bf.md}}
