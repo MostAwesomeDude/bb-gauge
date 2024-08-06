@@ -20,6 +20,25 @@ This table is tight in the sense that all unknown cells are bounded by the
 hardest open problems in mathematics, known as
 [cryptids](https://wiki.bbchallenge.org/wiki/Cryptids).
 
+## Universality
+
+These are from [Rogozhin
+1996](https://www.sciencedirect.com/science/article/pii/S0304397596000771).
+
+n, k | Problem | Source
+---|---|---
+2, 18 | Interp(Tag(2)) | Rogozhin 1996
+3, 10 | Interp(Tag(2)) | Rogozhin 1996
+4, 6  | Interp(Tag(2)) | Rogozhin 1996
+5, 5  | Interp(Tag(2)) | Rogozhin 1996
+7, 4  | Interp(Tag(2)) | Rogozhin 1996
+10, 3 | Interp(Tag(2)) | Rogozhin 1996
+24, 2 | Interp(Tag(2)) | Rogozhin 1996
+
+We are aware of other claims, notably Minsky 1962, which are popularly known
+but algorithmically deficient. It took us several decades to produce correct
+universal machines.
+
 ## Morphett
 
 These machines are given by

@@ -1,4 +1,20 @@
 {
+    "dbfi.b": {
+        "problem": "Interp(BF,[!])",
+        "source": "Cristofani 2002"
+    },
+    "bit-doubler.b": {
+        "problem": "Interp(BF²)",
+        "source": "NYYRIKKI 2002"
+    },
+    "interp-faase.b": {
+        "problem": "Interp(BF,[!])",
+        "source": "Faase 2002"
+    },
+    "interp-nyyrikki.b": {
+        "problem": "Interp(BF,[:])",
+        "source": "NYYRIKKI 2002"
+    },
     "utm.b": {
         "problem": "Interp(Tag(2))",
         "source": "Cristofani"

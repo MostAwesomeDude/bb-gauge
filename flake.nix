@@ -58,6 +58,10 @@
 
           meta.license = pkgs.lib.licenses.gpl2Plus;
         };
+        bf-dbfi = builtins.fetchurl {
+          url = "http://brainfuck.org/dbfi.b";
+          sha256 = "19zixvz4axfcjyfss5hirahng5ksnrsmpdibacc5g6wgi10amii5";
+        };
         bf-utm = builtins.fetchurl {
           url = "http://brainfuck.org/utm.b";
           sha256 = "1p7dk6fbn29rn9s35rkhcrggfg136dy5rkc89f0960al6ij7y5bx";
@@ -76,8 +80,13 @@
           ];
 
           buildPhase = ''
-            mkdir -p bf/
-            tr -c -d '<>+-,.\[]' < ${bf-utm} > bf/utm.b
+            cp ${bf-dbfi} bf/dbfi.b
+            cp ${bf-utm} bf/utm.b
+            mkdir bf-clean/
+            for b in bf/*; do
+              tr -c -d '<>+-,.\[]' < $b > "bf-clean/$(basename $b)"
+            done
+
             cp -r ${ait.src}/fast_growing_and_conjectures/ blc/ait/
 
             ${py}/bin/python3 gen.py 'BBλ(n)' blc.json \
@@ -89,7 +98,7 @@
               > src/nql.md
 
             ${py}/bin/python3 gen.py 'n' bf.json \
-              ${pkgs.gawk}/bin/awk '{print length}' bf/ \
+              ${pkgs.gawk}/bin/gawk '{ print length }' bf-clean/ \
               > src/bf.md
 
             mdbook build
