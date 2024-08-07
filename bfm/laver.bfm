@@ -1,0 +1,77 @@
+! registers
+! for storage: t2=N
+! for modulus: t1=n; t2=d; t3=result
+! for repeated push: t3=x; t4=y
+! for scrolling top of stack: t5=0
+! for big loop: t5=x
+t0=0; t1=1; t2=2; t3=3; t4=4; t5=5;
+! leave one cell empty above top of stack for scrolling
+! top of stack
+top=7;
+! marker for dipped cell: top plus 3
+markdip=10;
+
+! destructive modulus: starts on n and junks input cells
+! 0 *n m 0   0 0
+! 0 *~ ~ n%m 0 0
+mod(t1) = to(t1) [> ->+< [>] > [<+>-] << [<] >-] at(t1) ;
+
+! move a stack item deeper
+down() = [->>+<<] < ;
+
+! deepen the stack and make room on top
+unshift(top) = to(top) > [>>] << [ down() down() ] > at(top) >+ to(top) ;
+
+! push register to top of stack
+push(top,r) = unshift(top) move(r,top) ;
+
+! move a stack item shallower
+up() = [-<<+>>] > ;
+
+! destroy the top of stack and shift everything down
+shift(top) = zero(top) > [-] > [ up() up() ] <<< [<<] > at(top) ;
+
+! pop top of stack to a register
+pop(top,r) = move(top,r) shift(top) ;
+
+! N := 8
+to(t2) plus(8)
+
+! do while x
+to(t5) + while(t5)
+zero(t5)
+
+! N *= 2
+double(t2,t1) move(t1,t2)
+
+! push 16
+unshift(top) plus(16)
+
+! push 1
+unshift(top) +
+
+! do while stack depth at least 2
+while(markdip)
+
+! pop x; succ x
+pop(top,t1) to(t1) +
+
+! x %= N
+unshift(top) copy(t2,top,t3)
+mod(t1) zero(t1) zero(t2)
+pop(top,t2)
+
+! pop y
+pop(top,t4)
+
+! for each y push x
+for(t4) unshift(top) copy(t3,top,t5) move(t5,t3) next(t4)
+
+! end while stack depth at least 2
+wend(markdip)
+
+! pop x; x := if x then 0 else 1
+not(top,t5) shift(top)
+
+! end while x
+wend(t5)

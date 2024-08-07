@@ -15,6 +15,10 @@
         "problem": "Interp(BF,[:])",
         "source": "NYYRIKKI 2002"
     },
+    "laver.b": {
+        "problem": "Period 32 Laver table",
+        "source": "Simpson 2024"
+    },
     "utm.b": {
         "problem": "Interp(Tag(2))",
         "source": "Cristofani"

@@ -80,11 +80,13 @@
           ];
 
           buildPhase = ''
+            ${bfmacro}/bin/bfmacro -na bfm/laver.bfm > bf/laver.b
             cp ${bf-dbfi} bf/dbfi.b
             cp ${bf-utm} bf/utm.b
             mkdir bf-clean/
             for b in bf/*; do
-              tr -c -d '<>+-,.\[]' < $b > "bf-clean/$(basename $b)"
+              t="bf-clean/$(basename $b)"
+              <$b tr -c -d '<>+\-,.\[]' >$t
             done
 
             cp -r ${ait.src}/fast_growing_and_conjectures/ blc/ait/
@@ -107,6 +109,8 @@
           installPhase = ''
             mkdir -p $out/share/
             cp -r book/html/* $out/share/
+            mkdir -p $out/lib/
+            cp -r bf/ bf-clean/ $out/lib/
           '';
         };
       in {
