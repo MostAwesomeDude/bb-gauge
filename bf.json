@@ -7,6 +7,10 @@
         "problem": "Interp(BF²)",
         "source": "NYYRIKKI 2002"
     },
+    "erdos-lagarias.b": {
+        "problem": "Erdős–Lagarias conjecture",
+        "source": "Simpson 2024"
+    },
     "interp-faase.b": {
         "problem": "Interp(BF,[!])",
         "source": "Faase 2002"

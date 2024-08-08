@@ -16,24 +16,6 @@ markdip=10;
 ! 0 *~ ~ n%m 0 0
 mod(t1) = to(t1) [> ->+< [>] > [<+>-] << [<] >-] at(t1) ;
 
-! move a stack item deeper
-down() = [->>+<<] < ;
-
-! deepen the stack and make room on top
-unshift(top) = to(top) > [>>] << [ down() down() ] > at(top) >+ to(top) ;
-
-! push register to top of stack
-push(top,r) = unshift(top) move(r,top) ;
-
-! move a stack item shallower
-up() = [-<<+>>] > ;
-
-! destroy the top of stack and shift everything down
-shift(top) = zero(top) > [-] > [ up() up() ] <<< [<<] > at(top) ;
-
-! pop top of stack to a register
-pop(top,r) = move(top,r) shift(top) ;
-
 ! N := 8
 to(t2) plus(8)
 

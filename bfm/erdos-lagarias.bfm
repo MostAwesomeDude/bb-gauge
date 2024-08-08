@@ -1,0 +1,37 @@
+! whether we should keep looping
+loop=0;
+! empty cell for scrolling through trits
+! start of trits
+trits=2;
+
+to(loop) +
+! 243 9 3 1
+unshift(trits) + unshift(trits) unshift(trits) unshift(trits) + unshift(trits) + unshift(trits) +
+
+while(loop)
+    zero(loop)
+    ! multiply by two
+    stackdownward(trits)
+        ! multiply by two and add carry
+        >> [-<<<++>>>] << [-<+>]
+        ! div/mod three unrolled once
+        < [->>>+<<< [->>>+<<< [->+ >>-- <<< [->>>+<<<]]]] >
+    stackbury(trits)
+
+    ! check whether any digit is two
+    stackupward(trits)
+        <<
+        ! make copies of v
+        [->>>>+>+<<<<<]
+        >>>>
+        ! is v two?
+        [- [- <<<<+ >>>>[ <<<<- >>>>[-]] ]]
+        <<<<
+        ! if so then set a=1
+        [- >>[-]+ <<]
+        ! restore v and iterate
+        >>>>>
+        [-<<<<<+>>>>>] <<<
+    stackclimb(trits)
+    pop(trits,loop)
+wend(loop)
