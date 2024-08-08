@@ -1,11 +1,18 @@
 {
   description = "Computed Busy Beaver gauge";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     flake-utils.url = "github:numtide/flake-utils";
+    rpypkgs = {
+      url = "github:rpypkgs/rpypkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, rpypkgs }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
@@ -66,6 +73,7 @@
           url = "http://brainfuck.org/utm.b";
           sha256 = "1p7dk6fbn29rn9s35rkhcrggfg136dy5rkc89f0960al6ij7y5bx";
         };
+        bf = rpypkgs.packages.${system}.bf;
         # XXX pypy doesn't work with pyparsing?
         py = pkgs.python3.withPackages (ps: [ ps.pyparsing ]);
         bb-gauge = pkgs.stdenv.mkDerivation {
@@ -87,7 +95,7 @@
             mkdir bf-clean/
             for b in bf/*; do
               t="bf-clean/$(basename $b)"
-              <$b tr -c -d '<>+\-,.\[]' >$t
+              ${bf}/bin/bf -o $b >$t
             done
 
             cp -r ${ait.src}/fast_growing_and_conjectures/ blc/ait/
