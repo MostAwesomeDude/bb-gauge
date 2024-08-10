@@ -112,19 +112,23 @@
               ${pkgs.gawk}/bin/gawk '{ print length }' bf-clean/ \
               > src/bf.md
 
-            mdbook build
+            mkdir src/images/
 
-            ${py}/bin/python3 interval.py test.json > test.svg
+            ${py}/bin/python3 gen-intervals.py 48 bf.json \
+              ${pkgs.gawk}/bin/gawk '{ print length }' bf-clean/ \
+              > bf-intervals.json
+
+            ${py}/bin/python3 interval.py bf-intervals.json > src/images/bf.svg
+
+            mdbook build
           '';
 
           installPhase = ''
-            mkdir -p $out/share/
+            mkdir -p $out/share/images/
             cp -r book/html/* $out/share/
+
             mkdir -p $out/lib/
             cp -r bf/ bf-clean/ $out/lib/
-
-            mkdir -p $out/share/test/
-            cp test.svg $out/share/test/
           '';
         };
       in {

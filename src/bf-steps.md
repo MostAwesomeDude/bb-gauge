@@ -37,3 +37,5 @@ n  | BBB(n)
 Universality is known at the following values of n:
 
 {{#include bf.md}}
+
+![Interval tree of gauge for BBB](images/bf.svg)
