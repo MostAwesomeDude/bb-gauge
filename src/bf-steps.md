@@ -12,7 +12,15 @@ loops. A right-unbounded Brainfuck program only moves to the right of the
 starting cell, but has access to an unbounded number of cells. Every single
 instruction takes a single step, including loop tests.
 
-## Known Values
+## Summary
+
+The following diagram summarizes known values and problems relative to BBB.
+
+![Interval tree of gauge for BBB](images/bf.svg)
+
+## Tables of Values
+
+### Known Values
 
 Lower bounds for small n are established
 [here](https://www.iwriteiam.nl/Ha_bf_numb.html) on a variant of Brainfuck
@@ -32,10 +40,6 @@ n  | BBB(n)
 41 | ≥ 10 ↑ (10 ↑ 28)
 63 | ≥ 255 ↑↑ 2
 
-### Universality
-
-Universality is known at the following values of n:
+### Universality and Open Problems
 
 {{#include bf.md}}
-
-![Interval tree of gauge for BBB](images/bf.svg)

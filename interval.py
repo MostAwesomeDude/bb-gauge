@@ -15,8 +15,10 @@ root = ET.Element("svg", attrib={
     "xmlns": "http://www.w3.org/2000/svg",
 })
 
-COLORS = "plum", "paleturquoise", "palegoldenrod", "palegreen", "cornflowerblue",
-BG_COLORS = "darkslategrey", "dimgrey", "dimgrey", "dimgrey", "black",
+# COLORS = "plum", "paleturquoise", "palegoldenrod", "palegreen", "cornflowerblue",
+# BG_COLORS = "darkslategrey", "dimgrey", "dimgrey", "dimgrey", "black",
+COLORS = "purple", "teal", "peru", "darkslateblue", "seagreen", "saddlebrown",
+BG_COLORS = "lavender", "lightcyan", "cornsilk", "lavender", "lightcyan", "cornsilk",
 assert len(COLORS) == len(BG_COLORS)
 
 # Added term is extra space for positioning text on shortest line.
@@ -94,14 +96,14 @@ def addInterval(i, label, color, bg=None, start=None, end=None):
         "stroke-width": "10",
     })
     mid = (scaleEnd + scaleStart) >> 1
-    xText = max(START_PX, mid - 2 * len(label))
+    # xText = max(START_PX, mid - 2 * len(label))
     labelAbove, labelBelow = splitLabel(label)
     ET.SubElement(g, "text", attrib={
-        "x": f"{xText}", "y": f"{y - 30}",
+        "x": f"{scaleStart}", "y": f"{y - 25}",
         "stroke-width": "1",
     }).text = labelAbove
     ET.SubElement(g, "text", attrib={
-        "x": f"{xText}", "y": f"{y + 30}",
+        "x": f"{scaleStart}", "y": f"{y + 30}",
         "stroke-width": "1",
     }).text = labelBelow
 

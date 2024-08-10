@@ -20,7 +20,7 @@ def table(known, path, cmd):
     rows = defaultdict(list)
     for row in raw_rows:
         if row.startswith("Interp("): rows["Universality"].extend(raw_rows[row])
-    rows.update(raw_rows)
+        else: rows[row] = raw_rows[row]
 
     key = lambda t: t[1]
     d = {}
