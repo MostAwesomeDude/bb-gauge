@@ -113,6 +113,8 @@
               > src/bf.md
 
             mdbook build
+
+            ${py}/bin/python3 interval.py test.json > test.svg
           '';
 
           installPhase = ''
@@ -120,6 +122,9 @@
             cp -r book/html/* $out/share/
             mkdir -p $out/lib/
             cp -r bf/ bf-clean/ $out/lib/
+
+            mkdir -p $out/share/test/
+            cp test.svg $out/share/test/
           '';
         };
       in {
