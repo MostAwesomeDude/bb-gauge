@@ -50,8 +50,11 @@
           name = "bfmacro";
           version = "2005";
 
-          src = builtins.fetchurl {
-            url = "https://www.cs.tufts.edu/~couch/bfmacro/bfmacro/bfmacro";
+          src = pkgs.fetchurl {
+            urls = [
+              "https://www.cs.tufts.edu/~couch/bfmacro/bfmacro/bfmacro"
+              "https://corbinsimpson.com/mirror/bfmacro"
+            ];
             sha256 = "0dwlh3h58zv4slvv6cana6vgr9mgwln8y2227vj7r1n20agd3h3g";
           };
 
