@@ -17,10 +17,10 @@
       let
         pkgs = import nixpkgs { inherit system; };
         mm-tm = pkgs.fetchFromGitHub {
-          owner = "sorear";
+          owner = "MostAwesomeDude";
           repo = "metamath-turing-machines";
-          rev = "530d5450cbf0fe7d0d104ec0f0ab037857e8a49c";
-          sha256 = "sha256-k3QzWkBrE3/06rqCcEOvOfxHjcGrIB7hXHPMc9e/vlw=";
+          rev = "f88c4ee389e95f21e698c997bfa1e40a6bb04cb5";
+          sha256 = "sha256-7ONKuPf9E1V2agZBPfCfweI6n8xF29W1WnB6MPy72W4=";
         };
         ghc = pkgs.haskellPackages.ghcWithPackages (ps: [ ps.dlist ]);
         ait = pkgs.stdenv.mkDerivation {
