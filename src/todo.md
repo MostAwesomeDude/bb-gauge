@@ -75,4 +75,7 @@ Suggested by ais523:
 
 For tag systems, they note that skip is usually 2 ("2-tag"), and that
 Turing-completeness begins to manifest around 5 symbols or maximum word length
-4, with an explicit UTM in 2-tag, 19 symbols, maximum word length 4.
+3, with an explicit UTM in 2-tag, 19 symbols, maximum word length 4. Lore is
+that word length 2 is bounded in space, word length 3 is universal due to an
+algorithm which compiles down longer words, and that even though 3 is where
+universality starts, word length 4 is much easier for humans to work with.
