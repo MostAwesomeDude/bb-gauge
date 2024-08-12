@@ -98,26 +98,29 @@
               ${bf}/bin/bf -o $b >$t
             done
 
-            cp -r ${ait.src}/fast_growing_and_conjectures/ blc/ait/
+            cp -r ${ait.src}/ait/ blc/ait/
+            cp -r ${ait.src}/fast_growing_and_conjectures/ blc/fast_growing_and_conjectures/
 
-            ${py}/bin/python3 gen.py 'BBλ(n)' blc.json \
-              ${ait}/bin/blc size blc/ \
-              > src/blc.md
+            mkdir src/images/
 
             ${py}/bin/python3 gen.py 'BB(n,2)' nql.json \
               ${py}/bin/python3 ${mm-tm}/nqlaconic.py --print-tm ${mm-tm}/ \
               > src/nql.md
 
+            ${py}/bin/python3 gen.py 'BBλ(n)' blc.json \
+              ${ait}/bin/blc size blc/ \
+              > src/blc.md
+            ${py}/bin/python3 gen-intervals.py 36 blc.json \
+              ${ait}/bin/blc size blc/ \
+              > blc-intervals.json
+            ${py}/bin/python3 interval.py blc-intervals.json > src/images/blc.svg
+
             ${py}/bin/python3 gen.py 'n' bf.json \
               ${pkgs.gawk}/bin/gawk '{ print length }' bf-clean/ \
               > src/bf.md
-
-            mkdir src/images/
-
             ${py}/bin/python3 gen-intervals.py 48 bf.json \
               ${pkgs.gawk}/bin/gawk '{ print length }' bf-clean/ \
               > bf-intervals.json
-
             ${py}/bin/python3 interval.py bf-intervals.json > src/images/bf.svg
 
             mdbook build

@@ -1,23 +1,47 @@
 {
-    "ait/goldbach.lam": {
+    "ait/bf.lam": {
+        "problem": "Interp(BF)",
+        "source": "Felgenhauer & Tromp 2011"
+    },
+    "fast_growing_and_conjectures/goldbach.lam": {
         "problem": "Goldbach conjecture",
         "source": "Felgenhauer 2013"
     },
-    "ait/goodstein.lam": {
+    "fast_growing_and_conjectures/goodstein.lam": {
         "problem": "Goodstein's theorem",
         "source": "Felgenhauer 2014"
     },
-    "ait/laver.lam": {
+    "fast_growing_and_conjectures/laver.lam": {
         "problem": "Period 32 Laver table",
         "source": "Felgenhauer & Tromp 2016"
     },
-    "ait/oddperfect.lam": {
+    "fast_growing_and_conjectures/oddperfect.lam": {
         "problem": "Odd perfect number",
         "source": "Tromp 2020"
     },
-    "ait/perfect.lam": {
+    "fast_growing_and_conjectures/perfect.lam": {
         "problem": "Odd perfect number",
         "source": "Felgenhauer 2020"
+    },
+    "ait/uni.lam": {
+        "problem": "Interp(BLC2)",
+        "source": "Felgenhauer & Tromp 2011"
+    },
+    "ait/uni2.lam": {
+        "problem": "Interp(BLC2)",
+        "source": "Tromp 2024"
+    },
+    "ait/uni28.lam": {
+        "problem": "Interp(BLC2[8])",
+        "source": "Tromp 2024"
+    },
+    "ait/uni8.lam": {
+        "problem": "Interp(BLC[8])",
+        "source": "Felgenhauer & Tromp 2011"
+    },
+    "ait/uniK.lam": {
+        "problem": "Interp(BLC)",
+        "source": "Tromp 2024"
     },
     "codegolf/laver.lam": {
         "problem": "Period 32 Laver table",

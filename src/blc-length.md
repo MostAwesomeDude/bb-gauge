@@ -6,10 +6,12 @@ largest normal form of any normalizing closed lambda term of size n, where the
 size of a term is its length when encoded in
 [BLC](https://esolangs.org/wiki/Binary_lambda_calculus).
 
-## Known Values
+## Summary
 
-BBλ is known up to BBλ(36).
+The following diagram summarizes known values and problems relative to BBλ.
 
-## BLC
+![Interval tree of gauge for BBλ](images/blc.svg)
+
+### Tables of Computed Values
 
 {{#include blc.md}}
