@@ -1,0 +1,33 @@
+{
+    "catalan-mersenne.tm": {
+        "problem": "Catalan–Mersenne conjecture",
+        "offset": 2,
+        "source": "LittlePeng9 2013"
+    },
+    "fermat-prime.tm": {
+        "problem": "Fermat prime conjecture",
+        "offset": 9,
+        "source": "LittlePeng9 2013"
+    },
+    "goldbach.tm": {
+        "problem": "Goldbach conjecture",
+        "source": "LittlePeng9 2013"
+    },
+    "goldbach-ternary.tm": {
+        "problem": "Weak Goldbach conjecture",
+        "source": "LittlePeng9 2013"
+    },
+    "legendre.tm": {
+        "problem": "Legendre conjecture",
+        "offset": 9,
+        "source": "LittlePeng9 2013"
+    },
+    "odd-perfect.tm": {
+        "problem": "Odd perfect number",
+        "source": "LittlePeng9 2013"
+    },
+    "polya.tm": {
+        "problem": "Pólya's problem",
+        "source": "LittlePeng9 2013"
+    }
+}

@@ -110,6 +110,10 @@
               ${py}/bin/python3 ${mm-tm}/nqlaconic.py --print-tm ${mm-tm}/ \
               > src/nql.md
 
+            ${py}/bin/python3 gen.py 'BB(n,k)' morphett.json \
+              morphett turing-morphett/ \
+              > src/morphett.md
+
             ${py}/bin/python3 gen.py 'BBλ(n)' blc.json \
               ${ait}/bin/blc size blc/ \
               > src/blc.md
