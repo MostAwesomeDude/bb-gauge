@@ -91,8 +91,10 @@
           ];
 
           buildPhase = ''
-            ${bfmacro}/bin/bfmacro -na bfm/stack.bfm bfm/laver.bfm > bf/laver.b
-            ${bfmacro}/bin/bfmacro -na bfm/stack.bfm bfm/erdos-lagarias.bfm > bf/erdos-lagarias.b
+            ${bfmacro}/bin/bfmacro -na bfm/stack.bfm bfm/laver.bfm \
+              | sed '/^ *!/d' > bf/laver.b
+            ${bfmacro}/bin/bfmacro -na bfm/stack.bfm bfm/erdos-lagarias.bfm \
+              | sed '/^ *!/d' > bf/erdos-lagarias.b
             cp ${bf-dbfi} bf/dbfi.b
             cp ${bf-utm} bf/utm.b
             mkdir bf-clean/
@@ -145,7 +147,9 @@
         packages.default = bb-gauge;
         devShells.default = pkgs.mkShell {
           name = "bb-gauge-env";
-          packages = bb-gauge.buildInputs;
+          packages = bb-gauge.buildInputs ++ [
+            bf
+          ];
         };
       }
     );
