@@ -1,10 +1,7 @@
-! whether we should keep looping
-loop=0;
 ! empty cell for scrolling through trits
 ! start of trits
-trits=2;
+trits=1;
 
-to(loop) +
 ! push 2**8: 243 plus 9 plus 3 plus 1
 ! most significant trit is at the bottom of the stack
 unshift(trits) +
@@ -14,17 +11,24 @@ unshift(trits) +
 unshift(trits) +
 unshift(trits) +
 
-while(loop)
-    zero(loop)
+! prep loop indicator
+unshift(trits) +
+
+while(trits)
+
+    ! clear loop indicator
+    zero(trits)
+    ! put empty unmarked cell at top of stack
+    unshift(trits) >[-]>
 
     ! begin downwards stack iteration: multiply by two
+    >>>[<
     ! accumulated value will be stuck on bottom
     ! stack op will see following layout:
-    ! 0 0 *a 1 v 1
-    unshift(trits) unshift(trits) >-> >>>[<<<
+    ! 0 0 a 1 *v 1
 
     ! multiply by two and add carry
-    >> [-<<<++>>>] << [-<+>]
+    [-<<<++>>>] << [-<+>]
     ! div/mod three unrolled once
     < [->>>+<<< [->>>+<<< [->+ >>-- <<< [->>>+<<<]]]] >
 
@@ -32,14 +36,13 @@ while(loop)
     >> cellup2() <<< celldown() >>> >>>]<<< cellup() <<<<
 
     ! begin upwards stack iteration: check whether any digit is two
+    >[-]+< <[<
     ! stack operations will see following layout:
-    ! v 1 *a 1 0 0
+    ! *v 1 a 1 0 0
     ! all given registers may be used for scratch as long as they are restored
     ! also pointer is not located during any of this and must be returned to the
     ! location where it started on *a
-    >+< <[>
 
-    <<
     ! make copies of v
     [->>>>+>+<<<<<]
     >>>>
@@ -56,6 +59,4 @@ while(loop)
     ! pointer is located at top
     ! accumulated value is on top of stack
     < celldown2() >>> cellup() <<<< <]> at(trits)
-
-    pop(trits,loop)
-wend(loop)
+wend(trits)

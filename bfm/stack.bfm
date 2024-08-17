@@ -31,7 +31,7 @@ stackup2() = [-<<<<+>>>>] > ;
 cellup2() = stackup2() stackup2() ;
 
 ! deepen the stack and make room on top
-unshift(top) = to(top) scrolldown() < [ celldown() ] > >+< at(top) ;
+unshift(top) = to(top) scrolldown() < [ celldown() ] > at(top) >+< ;
 
 ! destroy the top of stack and shift everything down
 shift(top) = zero(top) > [-] > [ cellup() ] <<<< scrollup(top) ;
