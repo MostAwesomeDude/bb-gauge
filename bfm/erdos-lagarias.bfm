@@ -29,7 +29,7 @@ while(loop)
     < [->>>+<<< [->>>+<<< [->+ >>-- <<< [->>>+<<<]]]] >
 
     ! end downwards stack iteration
-    >> cellup2() <<< celldown() >>> >>>]<<< cellup() <<<< scrollup(trits)
+    >> cellup2() <<< celldown() >>> >>>]<<< cellup() <<<<
 
     ! begin upwards stack iteration: check whether any digit is two
     ! stack operations will see following layout:
@@ -37,7 +37,7 @@ while(loop)
     ! all given registers may be used for scratch as long as they are restored
     ! also pointer is not located during any of this and must be returned to the
     ! location where it started on *a
-    to(trits) scrolldown() >+< <[>
+    >+< <[>
 
     <<
     ! make copies of v
