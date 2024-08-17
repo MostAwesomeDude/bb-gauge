@@ -2,17 +2,19 @@
 ! start of trits
 trits=1;
 
+! hardcoded stack
+to(trits) right(13)
 ! push 2**8: 243 plus 9 plus 3 plus 1
 ! most significant trit is at the bottom of the stack
-unshift(trits) +
-unshift(trits)
-unshift(trits)
-unshift(trits) +
-unshift(trits) +
-unshift(trits) +
++< +<
++<  <
++<  <
++< +<
++< +<
++< +<
 
-! prep loop indicator
-unshift(trits) +
+! also push a loop indicator
++< +
 
 while(trits)
 
