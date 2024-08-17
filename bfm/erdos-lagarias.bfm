@@ -5,33 +5,57 @@ loop=0;
 trits=2;
 
 to(loop) +
-! 243 9 3 1
-unshift(trits) + unshift(trits) unshift(trits) unshift(trits) + unshift(trits) + unshift(trits) +
+! push 2**8: 243 plus 9 plus 3 plus 1
+! most significant trit is at the bottom of the stack
+unshift(trits) +
+unshift(trits)
+unshift(trits)
+unshift(trits) +
+unshift(trits) +
+unshift(trits) +
 
 while(loop)
     zero(loop)
-    ! multiply by two
-    stackdownward(trits)
-        ! multiply by two and add carry
-        >> [-<<<++>>>] << [-<+>]
-        ! div/mod three unrolled once
-        < [->>>+<<< [->>>+<<< [->+ >>-- <<< [->>>+<<<]]]] >
-    stackbury(trits)
 
-    ! check whether any digit is two
-    stackupward(trits)
-        <<
-        ! make copies of v
-        [->>>>+>+<<<<<]
-        >>>>
-        ! is v two?
-        [- [- <<<<+ >>>>[ <<<<- >>>>[-]] ]]
-        <<<<
-        ! if so then set a=1
-        [- >>[-]+ <<]
-        ! restore v and iterate
-        >>>>>
-        [-<<<<<+>>>>>] <<<
-    stackclimb(trits)
+    ! begin downwards stack iteration: multiply by two
+    ! accumulated value will be stuck on bottom
+    ! stack op will see following layout:
+    ! 0 0 *a 1 v 1
+    unshift(trits) unshift(trits) >-> >>>[<<<
+
+    ! multiply by two and add carry
+    >> [-<<<++>>>] << [-<+>]
+    ! div/mod three unrolled once
+    < [->>>+<<< [->>>+<<< [->+ >>-- <<< [->>>+<<<]]]] >
+
+    ! end downwards stack iteration
+    >> cellup2() <<< celldown() >>> >>>]<<< cellup() <<<< scrollup(trits)
+
+    ! begin upwards stack iteration: check whether any digit is two
+    ! stack operations will see following layout:
+    ! v 1 *a 1 0 0
+    ! all given registers may be used for scratch as long as they are restored
+    ! also pointer is not located during any of this and must be returned to the
+    ! location where it started on *a
+    to(trits) scrolldown() >+< <[>
+
+    <<
+    ! make copies of v
+    [->>>>+>+<<<<<]
+    >>>>
+    ! is v two?
+    [- [- <<<<+ >>>>[ <<<<- >>>>[-]] ]]
+    <<<<
+    ! if so then set a=1
+    [- >>[-]+ <<]
+    ! restore v and iterate
+    >>>>>
+    [-<<<<<+>>>>>] <<<
+
+    ! end upwards stack iteration
+    ! pointer is located at top
+    ! accumulated value is on top of stack
+    < celldown2() >>> cellup() <<<< <]> at(trits)
+
     pop(trits,loop)
 wend(loop)
