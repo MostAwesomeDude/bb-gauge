@@ -81,8 +81,8 @@ def addInterval(i, label, color, bg=None, start=None, end=None):
     if bg is not None:
         width = END_PX if rightOpen else scaleEnd - scaleStart + 100
         ET.SubElement(g, "rect", attrib={
-            "x": f"{scaleStart - 50}", "y": f"{y - 50}",
-            "width": f"{width}", "height": "100",
+            "x": f"{scaleStart - 50}", "y": f"{y - 45}",
+            "width": f"{width}", "height": "90",
             "rx": "50", "fill": bg,
         })
 
