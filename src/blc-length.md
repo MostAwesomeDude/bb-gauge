@@ -12,6 +12,4 @@ The following diagram summarizes known values and problems relative to BBλ.
 
 ![Interval tree of gauge for BBλ](images/lambda.svg)
 
-### Tables of Values
-
 {{#include lambda.md}}

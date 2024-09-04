@@ -18,9 +18,7 @@ The following diagram summarizes known values and problems relative to BBB.
 
 ![Interval tree of gauge for BBB](images/brainfuck.svg)
 
-## Tables of Values
-
-### Known Values
+## Known Values
 
 Lower bounds for small n are established
 [here](https://www.iwriteiam.nl/Ha_bf_numb.html) on a variant of Brainfuck
@@ -39,7 +37,5 @@ n  | BBB(n)
 39 | ≥ 31,919,535,558
 41 | ≥ 10 ↑ (10 ↑ 28)
 63 | ≥ 255 ↑↑ 2
-
-## Table of Values
 
 {{#include brainfuck.md}}

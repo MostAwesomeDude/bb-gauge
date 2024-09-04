@@ -1,6 +1,7 @@
 from collections import defaultdict, deque
 import json
 import math
+from operator import itemgetter
 import os.path
 import subprocess
 import sys
@@ -175,15 +176,17 @@ STRATEGIES = {
 
 def writeTable(path, label, db):
     with open(path, "w") as handle:
-        print(f"Problem | Source | {label}", file=handle)
-        print("---|---|---", file=handle)
+        print("## Tables of Values", file=handle)
         for problem, rows in db.items():
-            for d in rows:
+            print("###", problem, file=handle)
+            print(f"Source | {label}", file=handle)
+            print("---|---", file=handle)
+            for d in sorted(rows, key=itemgetter("value", "source")):
                 source = d["source"]
                 if "url" in d:
                     source = f"[{source}]({d['url']})"
                 value = d["value"]
-                print(f"{problem} | {source} | {value}", file=handle)
+                print(f"{source} | {value}", file=handle)
 
 def makeIntervals(db, known):
     # Synthetic rows.
@@ -192,10 +195,10 @@ def makeIntervals(db, known):
         if problem.startswith("Interp("): problems["Universality"].extend(rows)
         else: problems[problem] = rows
 
-    key = lambda t: t["value"]
     d = {}
     d["Known values"] = {"start": 0, "end": known}
-    d.update({k: {"start": min(map(key, l))} for k, l in problems.items()})
+    d.update({k: {"start": min(map(itemgetter("value"), l))}
+              for k, l in problems.items()})
     return d
 
 def loadDB(path):

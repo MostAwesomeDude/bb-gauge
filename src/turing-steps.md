@@ -25,6 +25,4 @@ This table is tight in the sense that all unknown cells are bounded by the
 hardest open problems in mathematics, known as
 [cryptids](https://wiki.bbchallenge.org/wiki/Cryptids).
 
-## Table of Values
-
 {{#include turing.md}}
