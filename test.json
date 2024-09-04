@@ -1,6 +1,0 @@
-{
-    "Known Values": {"start": 0, "end": 7},
-    "Universal": {"start": 12},
-    "Collatz": {"start": 15},
-    "Lagarias": {"start": 10}
-}

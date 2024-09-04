@@ -1,0 +1,90 @@
+{
+	"label": "BBλ(n)",
+	"known": 36,
+	"programs": [
+  {
+    "problem": "Interp(BF)",
+    "source": "Felgenhauer & Tromp 2011",
+    "url": "https://github.com/tromp/AIT/",
+    "strategy": "blc",
+    "params": "ait/bf.lam"
+  },
+  {
+    "problem": "Goldbach conjecture",
+    "source": "Felgenhauer 2013",
+    "url": "https://github.com/tromp/AIT/",
+    "strategy": "blc",
+    "params": "fast_growing_and_conjectures/goldbach.lam"
+  },
+  {
+    "problem": "Goodstein's theorem",
+    "source": "Felgenhauer 2014",
+    "url": "https://github.com/tromp/AIT/",
+    "strategy": "blc",
+    "params": "fast_growing_and_conjectures/goodstein.lam"
+  },
+  {
+    "problem": "Period 32 Laver table",
+    "source": "Felgenhauer & Tromp 2016",
+    "url": "https://github.com/tromp/AIT/",
+    "strategy": "blc",
+    "params": "fast_growing_and_conjectures/laver.lam"
+  },
+  {
+    "problem": "Odd perfect number",
+    "source": "Tromp 2020",
+    "url": "https://github.com/tromp/AIT/",
+    "strategy": "blc",
+    "params": "fast_growing_and_conjectures/oddperfect.lam"
+  },
+  {
+    "problem": "Odd perfect number",
+    "source": "Felgenhauer 2020",
+    "url": "https://github.com/tromp/AIT/",
+    "strategy": "blc",
+    "params": "fast_growing_and_conjectures/perfect.lam"
+  },
+  {
+    "problem": "Interp(BLC2)",
+    "source": "Felgenhauer & Tromp 2011",
+    "url": "https://github.com/tromp/AIT/",
+    "strategy": "blc",
+    "params": "ait/uni.lam"
+  },
+  {
+    "problem": "Interp(BLC2)",
+    "source": "Tromp 2024",
+    "url": "https://github.com/tromp/AIT/",
+    "strategy": "blc",
+    "params": "ait/uni2.lam"
+  },
+  {
+    "problem": "Interp(BLC2[8])",
+    "source": "Tromp 2024",
+    "url": "https://github.com/tromp/AIT/",
+    "strategy": "blc",
+    "params": "ait/uni28.lam"
+  },
+  {
+    "problem": "Interp(BLC[8])",
+    "source": "Felgenhauer & Tromp 2011",
+    "url": "https://github.com/tromp/AIT/",
+    "strategy": "blc",
+    "params": "ait/uni8.lam"
+  },
+  {
+    "problem": "Interp(BLC)",
+    "source": "Tromp 2024",
+    "url": "https://github.com/tromp/AIT/",
+    "strategy": "blc",
+    "params": "ait/uniK.lam"
+  },
+  {
+    "problem": "Period 32 Laver table",
+    "source": "Felgenhauer & Tromp 2016",
+    "url": "https://github.com/tromp/AIT/",
+    "strategy": "blc",
+    "params": "codegolf/laver.lam"
+  }
+]
+}

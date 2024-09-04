@@ -1,0 +1,149 @@
+{
+	"label": "BB(n,k)",
+	"known": 2,
+	"programs": [{
+		"problem": "Goldbach conjecture",
+		"source": "Code Golf Addict 2016",
+		"url": "https://gist.github.com/anonymous/a64213f391339236c2fe31f8749a0df6",
+		"strategy": "params",
+		"params": [27, 2]
+	},{
+		"problem": "Goldbach conjecture",
+		"source": "Showalter 2016",
+		"url": "https://gist.github.com/jms137/cbb66fb58dde067b0bece12873fadc76",
+		"strategy": "params",
+		"params": [47, 2]
+	},{
+		"problem": "Period 32 Laver table",
+		"source": "Taylor 2016",
+		"url": "http://cheddarmonk.org/papers/laver.pdf",
+		"strategy": "params",
+		"params": [64, 2]
+	},{
+		"problem": "Interp(Tag(2))",
+		"source": "Rogozhin 1996",
+		"url": "https://www.sciencedirect.com/science/article/pii/S0304397596000771",
+		"strategy": "params",
+		"params": [2, 18]
+	},{
+		"problem": "Interp(Tag(2))",
+		"source": "Rogozhin 1996",
+		"url": "https://www.sciencedirect.com/science/article/pii/S0304397596000771",
+		"strategy": "params",
+		"params": [3, 10]
+	},{
+		"problem": "Interp(Tag(2))",
+		"source": "Rogozhin 1996",
+		"url": "https://www.sciencedirect.com/science/article/pii/S0304397596000771",
+		"strategy": "params",
+		"params": [4, 6]
+	},{
+		"problem": "Interp(Tag(2))",
+		"source": "Rogozhin 1996",
+		"url": "https://www.sciencedirect.com/science/article/pii/S0304397596000771",
+		"strategy": "params",
+		"params": [5, 5]
+	},{
+		"problem": "Interp(Tag(2))",
+		"source": "Rogozhin 1996",
+		"url": "https://www.sciencedirect.com/science/article/pii/S0304397596000771",
+		"strategy": "params",
+		"params": [7, 4]
+	},{
+		"problem": "Interp(Tag(2))",
+		"source": "Rogozhin 1996",
+		"url": "https://www.sciencedirect.com/science/article/pii/S0304397596000771",
+		"strategy": "params",
+		"params": [10, 3]
+	},{
+		"problem": "Interp(Tag(2))",
+		"source": "Rogozhin 1996",
+		"url": "https://www.sciencedirect.com/science/article/pii/S0304397596000771",
+		"strategy": "params",
+		"params": [24, 2]
+	},{
+		"problem": "Catalan–Mersenne conjecture",
+		"source": "LittlePeng9 2013",
+		"url": "https://googology.fandom.com/wiki/User_blog:LittlePeng9/Random_Turing_machines",
+		"strategy": "morphett",
+		"params": ["catalan-mersenne.tm", 2]
+	},{
+		"problem": "Fermat prime conjecture",
+		"source": "LittlePeng9 2013",
+		"url": "https://googology.fandom.com/wiki/User_blog:LittlePeng9/Random_Turing_machines",
+		"strategy": "morphett",
+		"params": ["fermat-prime.tm", 9]
+	},{
+		"problem": "Goldbach conjecture",
+		"source": "LittlePeng9 2013",
+		"url": "https://googology.fandom.com/wiki/User_blog:LittlePeng9/Random_Turing_machines",
+		"strategy": "morphett",
+		"params": ["goldbach.tm", 0]
+	},{
+		"problem": "Weak Goldbach conjecture",
+		"source": "LittlePeng9 2013",
+		"url": "https://googology.fandom.com/wiki/User_blog:LittlePeng9/Random_Turing_machines",
+		"strategy": "morphett",
+		"params": ["goldbach-ternary.tm", 0]
+	},{
+		"problem": "Legendre conjecture",
+		"source": "LittlePeng9 2013",
+		"url": "https://googology.fandom.com/wiki/User_blog:LittlePeng9/Random_Turing_machines",
+		"strategy": "morphett",
+		"params": ["legendre.tm", 9]
+	},{
+		"problem": "Odd perfect number",
+		"source": "LittlePeng9 2013",
+		"url": "https://googology.fandom.com/wiki/User_blog:LittlePeng9/Random_Turing_machines",
+		"strategy": "morphett",
+		"params": ["odd-perfect.tm", 0]
+	},{
+		"problem": "Catalan–Mersenne conjecture",
+		"source": "LittlePeng9 2013",
+		"url": "https://googology.fandom.com/wiki/User_blog:LittlePeng9/Random_Turing_machines",
+		"strategy": "morphett",
+		"params": ["catalan-mersenne.tm", 2]
+	},{
+		"problem": "Pólya's problem",
+		"source": "LittlePeng9 2013",
+		"url": "https://googology.fandom.com/wiki/User_blog:LittlePeng9/Random_Turing_machines",
+		"strategy": "morphett",
+		"params": ["polya.tm", 0]
+	},
+  {
+    "problem": "Goldbach conjecture",
+    "source": "O'Rear 2016",
+    "url": "https://github.com/sorear/metamath-turing-machines",
+    "strategy": "nql",
+    "params": "goldbach.nql"
+  },
+  {
+    "problem": "Riemann hypothesis",
+    "source": "Aaronson & Matiyasevich 2016",
+    "url": "https://github.com/sorear/metamath-turing-machines",
+    "strategy": "nql",
+    "params": "riemann-matiyasevich-aaronson.nql"
+  },
+  {
+    "problem": "Riemann hypothesis",
+    "source": "O'Rear 2016",
+    "url": "https://github.com/sorear/metamath-turing-machines",
+    "strategy": "nql",
+    "params": "riemann.nql"
+  },
+  {
+    "problem": "Con(ZF)",
+    "source": "O'Rear 2016",
+    "url": "https://github.com/sorear/metamath-turing-machines",
+    "strategy": "nql",
+    "params": "zf.nql"
+  },
+  {
+    "problem": "Con(ZF)",
+    "source": "O'Rear 2016",
+    "url": "https://github.com/sorear/metamath-turing-machines",
+    "strategy": "nql",
+    "params": "zf2.nql"
+  }
+]
+}

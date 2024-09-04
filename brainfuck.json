@@ -1,0 +1,40 @@
+{
+	"label": "BBB(n)",
+	"known": 48,
+	"programs": [{
+		"problem": "Interp(BF,[!])",
+		"source": "Cristofani 2002",
+		"strategy": "brainfuck",
+		"params": "dbfi.b"
+	},{
+		"problem": "Interp(BF²)",
+		"source": "NYYRIKKI 2002",
+		"strategy": "brainfuck",
+		"params": "bit-doubler.b"
+	},{
+		"problem": "Erdős–Lagarias conjecture",
+		"source": "Simpson 2024",
+		"strategy": "brainfuck",
+		"params": "erdos-lagarias.b"
+	},{
+		"problem": "Interp(BF,[!])",
+		"source": "Faase 2002",
+		"strategy": "brainfuck",
+		"params": "interp-faase.b"
+	},{
+		"problem": "Interp(BF,[:])",
+		"source": "NYYRIKKI 2002",
+		"strategy": "brainfuck",
+		"params": "interp-nyyrikki.b"
+	},{
+		"problem": "Period 32 Laver table",
+		"source": "Simpson 2024",
+		"strategy": "brainfuck",
+		"params": "laver.b"
+	},{
+		"problem": "Interp(Tag(2))",
+		"source": "Cristofani",
+		"strategy": "brainfuck",
+		"params": "utm.b"
+	}]
+}

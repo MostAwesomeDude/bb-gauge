@@ -85,12 +85,13 @@
 
           src = ./.;
 
-          buildInputs = with pkgs; [
+          nativeBuildInputs = with pkgs; [
             py jq ait bfmacro
             mdbook mdbook-linkcheck
           ];
 
           buildPhase = ''
+            # Clean bfmacro.
             ${bfmacro}/bin/bfmacro -na bfm/stack.bfm bfm/laver.bfm \
               | sed '/^ *!/d' > bf/laver.b
             ${bfmacro}/bin/bfmacro -na bfm/stack.bfm bfm/erdos-lagarias.bfm \
@@ -98,39 +99,26 @@
             cp ${bf-dbfi} bf/dbfi.b
             cp ${bf-utm} bf/utm.b
             mkdir bf-clean/
+            # Compress BF.
             for b in bf/*; do
               t="bf-clean/$(basename $b)"
               ${bf}/bin/bf -o $b >$t
             done
 
+            # Copy BLC to the correct locations.
             cp -r ${ait.src}/ait/ blc/ait/
             cp -r ${ait.src}/fast_growing_and_conjectures/ blc/fast_growing_and_conjectures/
 
+            # Copy NQL to the correct locations.
+            mkdir nql/
+            cp ${mm-tm}/*.nql nql/
+            cp ${mm-tm}/{nqlast,nqlgrammar,framework}.py .
+
+            # Generate tables and diagrams.
             mkdir src/images/
-
-            ${py}/bin/python3 gen.py 'BB(n,2)' nql.json \
-              ${py}/bin/python3 ${mm-tm}/nqlaconic.py --print-tm ${mm-tm}/ \
-              > src/nql.md
-
-            ${py}/bin/python3 gen.py 'BB(n,k)' morphett.json \
-              morphett turing-morphett/ \
-              > src/morphett.md
-
-            ${py}/bin/python3 gen.py 'BBλ(n)' blc.json \
-              ${ait}/bin/blc size blc/ \
-              > src/blc.md
-            ${py}/bin/python3 gen-intervals.py 36 blc.json \
-              ${ait}/bin/blc size blc/ \
-              > blc-intervals.json
-            ${py}/bin/python3 interval.py blc-intervals.json > src/images/blc.svg
-
-            ${py}/bin/python3 gen.py 'n' bf.json \
-              ${pkgs.gawk}/bin/gawk '{ print length }' bf-clean/ \
-              > src/bf.md
-            ${py}/bin/python3 gen-intervals.py 48 bf.json \
-              ${pkgs.gawk}/bin/gawk '{ print length }' bf-clean/ \
-              > bf-intervals.json
-            ${py}/bin/python3 interval.py bf-intervals.json > src/images/bf.svg
+            ${py}/bin/python3 gen.py turing.json src/turing.md src/images/turing.svg
+            ${py}/bin/python3 gen.py brainfuck.json src/brainfuck.md src/images/brainfuck.svg
+            ${py}/bin/python3 gen.py lambda.json src/lambda.md src/images/lambda.svg
 
             mdbook build
           '';
@@ -149,6 +137,7 @@
           name = "bb-gauge-env";
           packages = bb-gauge.buildInputs ++ [
             bf
+            pkgs.python3Packages.pyflakes pkgs.jq
           ];
         };
       }

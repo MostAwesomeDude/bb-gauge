@@ -10,8 +10,8 @@ size of a term is its length when encoded in
 
 The following diagram summarizes known values and problems relative to BBλ.
 
-![Interval tree of gauge for BBλ](images/blc.svg)
+![Interval tree of gauge for BBλ](images/lambda.svg)
 
-### Tables of Computed Values
+### Tables of Values
 
-{{#include blc.md}}
+{{#include lambda.md}}

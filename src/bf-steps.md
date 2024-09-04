@@ -16,7 +16,7 @@ instruction takes a single step, including loop tests.
 
 The following diagram summarizes known values and problems relative to BBB.
 
-![Interval tree of gauge for BBB](images/bf.svg)
+![Interval tree of gauge for BBB](images/brainfuck.svg)
 
 ## Tables of Values
 
@@ -40,6 +40,6 @@ n  | BBB(n)
 41 | ≥ 10 ↑ (10 ↑ 28)
 63 | ≥ 255 ↑↑ 2
 
-### Universality and Open Problems
+## Table of Values
 
-{{#include bf.md}}
+{{#include brainfuck.md}}
