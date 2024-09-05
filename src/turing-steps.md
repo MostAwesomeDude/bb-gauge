@@ -10,6 +10,12 @@ appending the length of the initial tape to the symbol count: we treat them as
 shorthand for machines which use one state per symbol to write the initial tape
 before jumping to their main algorithm.
 
+## Summary
+
+The following diagram summarizes known values and problems relative to BB.
+
+![Interval tree of gauge for BB](images/turing.svg)
+
 ## Known Values
 
 BB(1,k) is defined as 1 for all k.

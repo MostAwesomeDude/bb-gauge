@@ -25,28 +25,71 @@ def splitLabel(s):
     r.reverse()
     return " ".join(l), " ".join(r)
 
-def arrowAt(g, x, y, pointsLeft=False):
-    i = 10 if pointsLeft else -10
-    o = -15 if pointsLeft else 15
-    ET.SubElement(g, "polygon", attrib={
-        "points": f"{x},{y} {x + i},{y - 15} {x + o},{y} {x + i},{y + 15}",
-        "stroke-width": "1",
-    })
+def synthRows(db):
+    problems = defaultdict(list)
+    for problem, rows in db.items():
+        if problem.startswith("Interp("): problems["Universality"].extend(rows)
+        else: problems[problem] = rows
+    return problems
+
+def makeIntervals1(db, known):
+    d = {k: {"start": min(map(itemgetter("value"), l))} for k, l in db.items()}
+    d["Known values"] = {"start": 0, "end": known}
+    return d
+
+def makeIntervals2(db, known):
+    d = {k: list(map(itemgetter("value"), l)) for k, l in db.items()}
+    d["Known values"] = known
+    return d
+
+COLORS = "purple", "teal", "peru", "darkslateblue", "seagreen", "saddlebrown",
+BG_COLORS = "lavender", "lightcyan", "cornsilk", "lavender", "lightcyan", "cornsilk",
+assert len(COLORS) == len(BG_COLORS)
+
+class Canvas:
+    def __init__(self, elt): self.elt = elt
+
+    def group(self, attrib):
+        return Canvas(ET.SubElement(self.elt, "g", attrib=attrib))
+
+    def entitle(self, s): ET.SubElement(self.elt, "title").text = s
+
+    def circleAt(self, x, y):
+        ET.SubElement(self.elt, "circle", attrib={
+            "r": "10", "cx": f"{x}", "cy": f"{y}",
+        })
+
+    def lineAt(self, attrib): ET.SubElement(self.elt, "line", attrib=attrib)
+
+    def rectAt(self, attrib): ET.SubElement(self.elt, "rect", attrib=attrib)
+
+    def textAt(self, s, attrib):
+        ET.SubElement(self.elt, "text", attrib=attrib).text = s
+
+    def arrowAt(self, x, y, pointsLeft=False):
+        i = 10 if pointsLeft else -10
+        o = -15 if pointsLeft else 15
+        ET.SubElement(self.elt, "polygon", attrib={
+            "points": f"{x},{y} {x + i},{y - 15} {x + o},{y} {x + i},{y + 15}",
+            "stroke-width": "1",
+        })
+
+    @classmethod
+    def ofSize(cls, width, height):
+        return cls(ET.Element("svg", attrib={
+            "version": "1.1", "width": str(width), "height": str(height),
+            "xmlns": "http://www.w3.org/2000/svg",
+        }))
+
+    def finish(self, path):
+        with open(path, "w") as handle:
+            ET.ElementTree(self.elt).write(handle, encoding="unicode")
 
 # Draw a 1D interval tree.
-def writeDiagram(path, intervals):
+def writeDiagram1(path, intervals):
     HEIGHT = 100 * (len(intervals) + 1)
     WIDTH = 500
-    root = ET.Element("svg", attrib={
-        "version": "1.1", "width": str(WIDTH), "height": str(HEIGHT),
-        "xmlns": "http://www.w3.org/2000/svg",
-    })
-
-    # COLORS = "plum", "paleturquoise", "palegoldenrod", "palegreen", "cornflowerblue",
-    # BG_COLORS = "darkslategrey", "dimgrey", "dimgrey", "dimgrey", "black",
-    COLORS = "purple", "teal", "peru", "darkslateblue", "seagreen", "saddlebrown",
-    BG_COLORS = "lavender", "lightcyan", "cornsilk", "lavender", "lightcyan", "cornsilk",
-    assert len(COLORS) == len(BG_COLORS)
+    canvas = Canvas.ofSize(WIDTH, HEIGHT)
 
     # Added term is extra space for positioning text on shortest line.
     MAX = max(max(v.values()) for v in intervals.values()) + (max(map(len, intervals)) >> 1)
@@ -61,55 +104,46 @@ def writeDiagram(path, intervals):
         offset = 0 if x == 0 else int(SCALE_PX * math.log(x) / math.log(MAX))
         return offset + START_PX
 
-    def circleAt(g, x, y):
-        ET.SubElement(g, "circle", attrib={
-            "r": "10", "cx": f"{scale(x)}", "cy": f"{y}",
-        })
-
     def addInterval(i, label, color, bg=None, start=None, end=None):
-        g = ET.SubElement(root, "g", attrib={
+        g = canvas.group(attrib={
+            "transform": f"translate(0 {100 * i})",
             "fill": color, "stroke": color,
         })
-        y = 100 * i + 50
 
         titleStart = "…" if start is None else f"[{start}"
         titleEnd = "…" if end is None else f"{end}]"
         titleDash = "—" if start is None or end is None else "–"
-        ET.SubElement(g, "title").text = " ".join([
-            label, titleStart, titleDash, titleEnd,
-        ])
+        g.entitle(" ".join([label, titleStart, titleDash, titleEnd]))
 
         leftOpen = start is None; rightOpen = end is None
         scaleStart = scale(start or 0); scaleEnd = scale(end or MAX)
 
         if bg is not None:
             width = END_PX if rightOpen else scaleEnd - scaleStart + 100
-            ET.SubElement(g, "rect", attrib={
-                "x": f"{scaleStart - 50}", "y": f"{y - 45}",
+            g.rectAt(attrib={
+                "x": f"{scaleStart - 50}", "y": "5",
                 "width": f"{width}", "height": "90",
                 "rx": "50", "fill": bg,
             })
 
         # Delayed in order to put them in front of background.
-        arrowAt(g, START_PX, y, pointsLeft=True) if leftOpen else circleAt(g, start, y)
-        arrowAt(g, END_PX, y, pointsLeft=False) if rightOpen else circleAt(g, end, y)
+        g.arrowAt(START_PX, 50, pointsLeft=True) if leftOpen else g.circleAt(scale(start), 50)
+        g.arrowAt(END_PX, 50, pointsLeft=False) if rightOpen else g.circleAt(scale(end), 50)
 
-        ET.SubElement(g, "line", attrib={
-            "x1": f"{scaleStart}", "y1": f"{y}",
-            "x2": f"{scaleEnd}", "y2": f"{y}",
+        g.lineAt(attrib={
+            "x1": f"{scaleStart}", "y1": "50",
+            "x2": f"{scaleEnd}", "y2": "50",
             "stroke-width": "10",
         })
-        # mid = (scaleEnd + scaleStart) >> 1
-        # xText = max(START_PX, mid - 2 * len(label))
         labelAbove, labelBelow = splitLabel(label)
-        ET.SubElement(g, "text", attrib={
-            "x": f"{scaleStart}", "y": f"{y - 25}",
+        g.textAt(labelAbove, attrib={
+            "x": f"{scaleStart}", "y": "25",
             "stroke-width": "1",
-        }).text = labelAbove
-        ET.SubElement(g, "text", attrib={
-            "x": f"{scaleStart}", "y": f"{y + 30}",
+        })
+        g.textAt(labelBelow, attrib={
+            "x": f"{scaleStart}", "y": "80",
             "stroke-width": "1",
-        }).text = labelBelow
+        })
 
     addInterval(0, "n", "black", start=0)
     for i, (k, v) in enumerate(sorted(intervals.items(),
@@ -117,8 +151,30 @@ def writeDiagram(path, intervals):
         ci = i % len(COLORS)
         addInterval(i + 1, k, COLORS[ci], bg=BG_COLORS[ci], **v)
 
-    with open(path, "w") as handle:
-        ET.ElementTree(root).write(handle, encoding="unicode")
+    canvas.finish(path)
+
+# Draw a 2D interval tree.
+def writeDiagram2(path, intervals):
+    MAXH = max(t[0] for p in intervals.values() for t in p)
+    MAXW = max(t[1] for p in intervals.values() for t in p)
+    WIDTH = 500
+    HEIGHT = WIDTH * MAXH // MAXW
+    canvas = Canvas.ofSize(WIDTH, HEIGHT)
+
+    def scale(x, y):
+        sx = int(WIDTH * math.log(x) / math.log(MAXW))
+        sy = int(HEIGHT * math.log(x) / math.log(MAXH))
+        return sx, sy
+
+    def addInterval(i, label, color):
+        pass
+
+    addInterval(0, "n", "black")
+    for i, (k, v) in enumerate(intervals.items()):
+        ci = i % len(COLORS)
+        addInterval(i + 1, k, COLORS[ci])
+
+    canvas.finish(path)
 
 def countBLC(d):
     cmd = ["blc", "size", os.path.join("blc", d["params"])]
@@ -188,19 +244,6 @@ def writeTable(path, label, db):
                 value = d["value"]
                 print(f"{source} | {value}", file=handle)
 
-def makeIntervals(db, known):
-    # Synthetic rows.
-    problems = defaultdict(list)
-    for problem, rows in db.items():
-        if problem.startswith("Interp("): problems["Universality"].extend(rows)
-        else: problems[problem] = rows
-
-    d = {}
-    d["Known values"] = {"start": 0, "end": known}
-    d.update({k: {"start": min(map(itemgetter("value"), l))}
-              for k, l in problems.items()})
-    return d
-
 def loadDB(path):
     with open(path, "r") as handle: d = json.load(handle)
     rows = defaultdict(list)
@@ -211,6 +254,10 @@ def loadDB(path):
         rows[problem].append(program)
     return d["label"], d["known"], rows
 
+def detectDims(db):
+    value = next(iter(db.values()))[0]["value"]
+    return 1 if isinstance(value, int) else len(value)
+
 def main(argv):
     if len(argv) != 4:
         print("Usage: gen.py <db.json> <table.md> <diagram.svg>")
@@ -219,10 +266,18 @@ def main(argv):
     print("Got DB from", argv[1], f"({label})")
     writeTable(argv[2], label, db)
     print("Wrote table to", argv[2])
-    intervals = makeIntervals(db, known)
-    # XXX
-    if "turing" not in argv[3]: writeDiagram(argv[3], intervals)
-    print("Wrote diagram to", argv[3])
+    dims = detectDims(db)
+    if dims == 1:
+        intervals = makeIntervals1(synthRows(db), known)
+        writeDiagram1(argv[3], intervals)
+        print("Wrote 1D diagram to", argv[3])
+    elif dims == 2:
+        intervals = makeIntervals2(synthRows(db), known)
+        writeDiagram2(argv[3], intervals)
+        print("Wrote 2D diagram to", argv[3])
+    else:
+        print("Can't handle", dims, "dimensions")
+        return 1
     return 0
 
 if __name__ == "__main__": raise SystemExit(main(sys.argv))

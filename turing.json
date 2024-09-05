@@ -1,6 +1,6 @@
 {
 	"label": "BB(n,k)",
-	"known": 2,
+	"known": [[5,2],[2,2],[2,4]],
 	"programs": [{
 		"problem": "Goldbach conjecture",
 		"source": "Code Golf Addict 2016",
