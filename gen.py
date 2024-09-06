@@ -37,8 +37,16 @@ def makeIntervals1(db, known):
     d["Known values"] = {"start": 0, "end": known}
     return d
 
+def better(node, candidate):
+    nx, ny = node
+    cx, cy = candidate
+    return (nx == cx and ny < cy) or (nx < cx and ny == cy)
+def frontier(nodes):
+    ns = list(sorted(nodes))
+    return list(filter(lambda node: not any(better(n, node) for n in ns), ns))
+
 def makeIntervals2(db, known):
-    d = {k: list(map(itemgetter("value"), l)) for k, l in db.items()}
+    d = {k: frontier(map(itemgetter("value"), l)) for k, l in db.items()}
     d["Known values"] = known
     return d
 
@@ -59,7 +67,12 @@ class Canvas:
             "r": "10", "cx": f"{x}", "cy": f"{y}",
         })
 
-    def lineAt(self, attrib): ET.SubElement(self.elt, "line", attrib=attrib)
+    def lineAt(self, x1, y1, x2, y2):
+        ET.SubElement(self.elt, "line", attrib={
+            "x1": f"{x1}", "y1": f"{y1}",
+            "x2": f"{x2}", "y2": f"{y2}",
+            "stroke-width": "10",
+        })
 
     def rectAt(self, attrib): ET.SubElement(self.elt, "rect", attrib=attrib)
 
@@ -130,11 +143,7 @@ def writeDiagram1(path, intervals):
         g.arrowAt(START_PX, 50, pointsLeft=True) if leftOpen else g.circleAt(scale(start), 50)
         g.arrowAt(END_PX, 50, pointsLeft=False) if rightOpen else g.circleAt(scale(end), 50)
 
-        g.lineAt(attrib={
-            "x1": f"{scaleStart}", "y1": "50",
-            "x2": f"{scaleEnd}", "y2": "50",
-            "stroke-width": "10",
-        })
+        g.lineAt(scaleStart, 50, scaleEnd, 50)
         labelAbove, labelBelow = splitLabel(label)
         g.textAt(labelAbove, attrib={
             "x": f"{scaleStart}", "y": "25",
@@ -155,24 +164,38 @@ def writeDiagram1(path, intervals):
 
 # Draw a 2D interval tree.
 def writeDiagram2(path, intervals):
-    MAXH = max(t[0] for p in intervals.values() for t in p)
-    MAXW = max(t[1] for p in intervals.values() for t in p)
-    WIDTH = 500
-    HEIGHT = WIDTH * MAXH // MAXW
+    MAXW = max(t[0] for p in intervals.values() for t in p)
+    MAXH = max(t[1] for p in intervals.values() for t in p)
+    # Enforce a border of 50 and space for axes.
+    WIDTH = 500 + 100
+    HEIGHT = int((WIDTH - 200) * math.log(MAXW) / math.log(MAXH)) + 200
     canvas = Canvas.ofSize(WIDTH, HEIGHT)
 
     def scale(x, y):
-        sx = int(WIDTH * math.log(x) / math.log(MAXW))
-        sy = int(HEIGHT * math.log(x) / math.log(MAXH))
+        sx = int((WIDTH - 200) * math.log(x) / math.log(MAXW))
+        sy = int((HEIGHT - 200) * math.log(y) / math.log(MAXH))
         return sx, sy
 
-    def addInterval(i, label, color):
-        pass
+    def addInterval(i, nodes, label, color):
+        g = canvas.group(attrib={
+            # Move inside the border.
+            "transform": "translate(150 150)",
+            "fill": color, "stroke": color,
+        })
 
-    addInterval(0, "n", "black")
+        g.entitle(label)
+
+        sx, sy = scale(*nodes[0])
+        g.circleAt(sx, sy)
+        for x, y in nodes[1:]:
+            sx2, sy2 = scale(x, y)
+            g.lineAt(sx, sy, sx2, sy2)
+            g.circleAt(sx2, sy2)
+            sx, sy = sx2, sy2
+
     for i, (k, v) in enumerate(intervals.items()):
         ci = i % len(COLORS)
-        addInterval(i + 1, k, COLORS[ci])
+        addInterval(i, v, k, COLORS[ci])
 
     canvas.finish(path)
 
