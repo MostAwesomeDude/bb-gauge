@@ -47,7 +47,12 @@ def frontier(nodes):
 
 def makeIntervals2(db, known):
     d = {k: frontier(map(itemgetter("value"), l)) for k, l in db.items()}
-    d["Known values"] = known
+    # Hack for TMs: indicate known values for n=1 and k=1
+    d["Known values"] = [
+        (max(t[0] for p in d.values() for t in p), 1)
+    ] + known + [
+        (1, max(t[1] for p in d.values() for t in p))
+    ]
     return d
 
 COLORS = "purple", "teal", "peru", "darkslateblue", "seagreen", "saddlebrown",
@@ -87,6 +92,19 @@ class Canvas:
             "stroke-width": "1",
         })
 
+    def rayAt(self, cx, cy, lx, th, addArrow, label=""):
+        g = self.group(attrib={
+            "transform": f"translate({cx} {cy}) rotate({th})",
+        })
+        g.circleAt(0, 0)
+        g.lineAt(0, 0, lx, 0)
+        if addArrow: g.arrowAt(lx, 0)
+        if label:
+            g.textAt(label, attrib={
+                "x": "20", "y": "25",
+                "stroke-width": "1",
+            })
+
     @classmethod
     def ofSize(cls, width, height):
         return cls(ET.Element("svg", attrib={
@@ -100,8 +118,8 @@ class Canvas:
 
 # Draw a 1D interval tree.
 def writeDiagram1(path, intervals):
-    HEIGHT = 100 * (len(intervals) + 1)
-    WIDTH = 500
+    HEIGHT = 100 * len(intervals) + 100
+    WIDTH = 600
     canvas = Canvas.ofSize(WIDTH, HEIGHT)
 
     # Added term is extra space for positioning text on shortest line.
@@ -154,7 +172,11 @@ def writeDiagram1(path, intervals):
             "stroke-width": "1",
         })
 
-    addInterval(0, "n", "black", start=0)
+    axes = canvas.group(attrib={
+        "fill": "black", "stroke": "black",
+    })
+    axes.rayAt(50, 50, WIDTH - 100, 0, True, "n")
+
     for i, (k, v) in enumerate(sorted(intervals.items(),
                                       key=lambda t: t[1].get("start", 0))):
         ci = i % len(COLORS)
@@ -164,8 +186,9 @@ def writeDiagram1(path, intervals):
 
 # Draw a 2D interval tree.
 def writeDiagram2(path, intervals):
-    MAXW = max(t[0] for p in intervals.values() for t in p)
-    MAXH = max(t[1] for p in intervals.values() for t in p)
+    # NB: n/k are swapped here for presentation purposes. Sorry in advance.
+    MAXW = max(t[1] for p in intervals.values() for t in p)
+    MAXH = max(t[0] for p in intervals.values() for t in p)
     # Enforce a border of 50 and space for axes.
     WIDTH = 500 + 100
     HEIGHT = int((WIDTH - 200) * math.log(MAXW) / math.log(MAXH)) + 200
@@ -185,17 +208,23 @@ def writeDiagram2(path, intervals):
 
         g.entitle(label)
 
-        sx, sy = scale(*nodes[0])
+        y, x = nodes[0]
+        sx, sy = scale(x, y)
         g.circleAt(sx, sy)
-        for x, y in nodes[1:]:
+        for y, x in nodes[1:]:
             sx2, sy2 = scale(x, y)
             g.lineAt(sx, sy, sx2, sy2)
             g.circleAt(sx2, sy2)
             sx, sy = sx2, sy2
 
     for i, (k, v) in enumerate(intervals.items()):
-        ci = i % len(COLORS)
-        addInterval(i, v, k, COLORS[ci])
+        addInterval(i, v, k, COLORS[i % len(COLORS)])
+
+    axes = canvas.group(attrib={
+        "fill": "black", "stroke": "black",
+    })
+    axes.rayAt(50, 150, HEIGHT - 200, 90, True, "n")
+    axes.rayAt(150, 50, WIDTH - 200, 0, True, "k")
 
     canvas.finish(path)
 
