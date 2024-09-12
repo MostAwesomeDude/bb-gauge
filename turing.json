@@ -20,6 +20,18 @@
 		"strategy": "params",
 		"params": [64, 2]
 	},{
+		"problem": "Erdős–Lagarias conjecture",
+		"source": "Stérin & Woods 2021",
+		"url": "https://arxiv.org/abs/2107.12475",
+		"strategy": "params",
+		"params": [15, 2]
+	},{
+		"problem": "Erdős–Lagarias conjecture",
+		"source": "Stérin & Woods 2021",
+		"url": "https://arxiv.org/abs/2107.12475",
+		"strategy": "params",
+		"params": [5, 4]
+	},{
 		"problem": "Interp(Tag(2))",
 		"source": "Rogozhin 1996",
 		"url": "https://www.sciencedirect.com/science/article/pii/S0304397596000771",
