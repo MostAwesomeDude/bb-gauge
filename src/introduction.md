@@ -1,67 +1,52 @@
 # Introduction
 
-This living book compares the sizes of programs in several Turing-complete
-categories in order to gauge the relative expressive power and difficulty of
-longstanding open problems in mathematics. Our approach will follow the
-following pattern:
+## Idea
 
-* Many functions describing properties of computer programs are uncomputable
-  ([WP](https://en.wikipedia.org/wiki/Computable_function),
-  [nLab](https://ncatlab.org/nlab/show/computability)) because they give
-  oracles for [Halting](https://en.wikipedia.org/wiki/Halting_problem)
-* Choose a computer, a property of its programs, and a formal system;
-  enumerate the system's theorems with a program for the computer, halting if
-  and only if a contradiction is found
-* If this system has a theorem determining every value of the property for
-  every program, then this theorem determines whether the enumerating program
-  will halt and the enumerating program will eventually find it, allowing the
-  system to decide its own consistency in violation of [Gödel's second
-  incompleteness](https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems);
-  so, any formal system can only prove at most finitely many instances of any
-  property of programs
+How hard are questions about mathematics? Some have remained open for
+millennia, some are considered too hard for all known techniques, and some
+have only been answered with the help of computers. Nonetheless, some
+questions are harder than others; in particular, sometimes progress on one
+question can contribute answers to other questions.
 
-If we're careful about the details implied by each of these steps, then we can
-gauge the complexity of any open problem in mathematics:
+How do computers help with mathematical questions? Mathematics can be
+**formalized**: reduced to manipulation of abstract symbols, like letters on a
+page or beads on an abacus. Answers to questions can be formalized as proofs,
+which are sequences of manipulations that follow some predetermined rules. A
+computer can be programmed to perform a search for a proof. (Indeed, in a
+certain sense, [all programs are searches for
+proofs](https://ncatlab.org/nlab/show/proofs+as+programs).) However, if there
+is no proof, then the program will run forever, and [whether a program will
+halt](https://en.wikipedia.org/wiki/Halting_problem) is itself uncomputable
+([WP](https://en.wikipedia.org/wiki/Computable_function),
+[nLab](https://ncatlab.org/nlab/show/computability)).
 
-* Choose a computer and a formal system for expressing the problem
-* Encode a search for counterexamples/proofs to the problem as a proof search
-  over the formal system
-* Choose an uncomputable property of programs
-* Without loss of generality, we may index the uncomputable portion of the
-  property by some computable property known during enumeration; it is still
-  uncomputable
-* Assign comparison operators to the index
+What use is a program that might run forever? On its own, not much. However,
+this living book presents a collection of several different programs, collated
+by formalism and mathematical question, which all search for proofs in one way
+or another. We may then roughly *gauge* the difficulty of questions by
+comparing the sizes of different programs which each search for proofs
+answering the same question.
 
-For a fully-worked example of the entire recipe, consider:
+As a quick aside: the search for bounds on halting programs is known as the
+[busy beaver game](https://en.wikipedia.org/wiki/Busy_beaver), and so this
+book is naturally known as the **Busy Beaver Gauge**.
 
-* The function BB giving the maximum number of steps taken by halting Turing
-  machines is uncomputable, as it could be used to decide Halting by providing
-  a cutoff
-* Without loss of generality, we may index BB by states and symbols
-* BB is valued in natural numbers, and by a counting argument, BB is monotone
-  with regard to both states and symbols
-* In natural number theory, we may search for k such that k > 8 and 2
-  exponentiated to the k'th power has at least one '2' in its trinary
-  representation (alternatively, such that k > 8 and 2 exponentiated to the
-  k'th power cannot be written as a sum of distinct powers of 3)
-* We do not yet know whether this statement is true, so we do not yet know
-  whether this search will halt
-* We may encode the search directly as a 15-state 2-symbol Turing machine or a
-  5-state 4-symbol Turing machine, done by [Stérin & Woods
-  2021](https://arxiv.org/abs/2107.12475)
+## Nuts & Bolts
 
-Therefore, we may say that this particular number-theoretic question, known as
-one of Erdős' conjectures, is gauged to be at most as hard as BB(15,2) or
-BB(5,4). While this is far beyond our ability to compute with brute force, we
-may nonetheless compare it to other conjectures, such as Goldbach's
-conjecture, which has been gauged to be at most as hard as BB(43,2).
+To make this whole concept useful, we choose machines and languages which are
+Turing-complete and seem relatively simple to describe (in the sense of
+[Kolmogorov complexity](https://en.wikipedia.org/wiki/Kolmogorov_complexity))
+but are otherwise not particularly good for expressing any facet of
+mathematics, in order to be unbiased. We also must find reasonable ways of
+measuring the size of programs such that smaller programs are simpler than
+larger programs.
 
-More generally, if our properties are not neatly indexed by natural numbers or
-do not obey nice shrinking behaviors, we may still consider programs under
-some reduction and then require properties to be invariant or monotone as
-reduction proceeds, as well as converging to some limit after a finite number
-of reductions. The classic example is gauging the size of expressions in
-lambda calculus; we could work with [OEIS A114851, the number of terms of
-given size](https://oeis.org/A114851), but we may find it easier to work with
-the reduced gauge [OEIS A195691, the number of closed terms in normal
-form](https://oeis.org/A195691).
+We also need a good list of unsolved problems in mathematics. These problems
+need to be questions; specifically, we need to be able to search for a
+definite answer to the question using only one infinite loop or infinite
+recursion.
+
+Finally, we wish to thank the many folks who authored the programs that we
+study here. Credits are given per-program in the following pages, in tables of
+values at the bottom of each page. Where possible, we also link to English
+Wikipedia (WP), the esoteric languages wiki (esolangs), and the *n*Lab.
