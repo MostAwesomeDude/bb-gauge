@@ -1,20 +1,8 @@
 # Busy Beaver Gauge
 
-- [Introduction](./intro.md)
+- [Introduction](./introduction.md)
 - [Problems](./problems.md)
-
-# Turing Machines
-
-- [Steps](./turing-steps.md)
-
-# Lambda Calculus
-
-- [Length](./blc-length.md)
-
-# Brainfuck
-
-- [Steps](./bf-steps.md)
-
-# Conclusion
-
+- [Turing Machines](./turing-machines.md)
+- [Binary Lambda Calculus](./binary-lambda-calculus.md)
+- [Brainfuck](./brainfuck.md)
 - [Future Directions](./todo.md)
