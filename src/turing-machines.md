@@ -12,7 +12,11 @@ before jumping to their main algorithm.
 
 ## Summary
 
-The following diagram summarizes known values and problems relative to BB.
+The following diagram summarizes known values and problems relative to BB. It
+is hard to read due to relatively high dimensionality; the solid violet barrier
+from the top to the left gives known values of BB, the blue wall is given by
+Rogozhin's machines, and the other known implementations are a smattered
+constellation of dots.
 
 ![Interval tree of gauge for BB](images/turing.svg)
 
