@@ -1,4 +1,4 @@
-# Length
+# Binary Lambda Calculus
 
 This article covers the uncomputable function [OEIS
 A333479](https://oeis.org/A333479), known as BBλ. BBλ(n) is the size of the

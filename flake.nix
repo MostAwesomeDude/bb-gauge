@@ -117,7 +117,7 @@
             # Generate tables and diagrams.
             mkdir src/images/
             ${py}/bin/python3 gen.py turing.json src/turing.md src/images/turing.svg
-            ${py}/bin/python3 gen.py brainfuck.json src/brainfuck.md src/images/brainfuck.svg
+            ${py}/bin/python3 gen.py brainfuck.json src/brainfuck-table.md src/images/brainfuck.svg
             ${py}/bin/python3 gen.py lambda.json src/lambda.md src/images/lambda.svg
 
             mdbook build

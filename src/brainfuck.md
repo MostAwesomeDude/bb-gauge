@@ -1,4 +1,4 @@
-# Steps
+# Brainfuck
 
 This article covers the Busy Brain Beaver function BBB(n) counting the maximum
 number of steps taken by non-interactive right-unbounded Brainfuck programs of
@@ -38,4 +38,4 @@ n  | BBB(n)
 41 | ≥ 10 ↑ (10 ↑ 28)
 63 | ≥ 255 ↑↑ 2
 
-{{#include brainfuck.md}}
+{{#include brainfuck-table.md}}

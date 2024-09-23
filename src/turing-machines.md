@@ -1,4 +1,4 @@
-# Steps
+# Turing Machines
 
 This article covers the uncomputable function BB. BB(n,k) is the maximum
 number of steps taken by any n-state k-symbol halting Turing machine. As a
