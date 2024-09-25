@@ -283,19 +283,25 @@ STRATEGIES = {
     "params": lambda d: tuple(d["params"]),
 }
 
+def formatParams(x):
+    if isinstance(x, list): return str(tuple(x))
+    elif x: return str(x)
+    else: return ""
+
 def writeTable(path, label, db):
     with open(path, "w") as handle:
         print("## Tables of Values", file=handle)
         for problem, rows in db.items():
             print("###", problem, file=handle)
-            print(f"Source | {label}", file=handle)
-            print("---|---", file=handle)
+            print(f"Source | Program Name/Parameters | {label}", file=handle)
+            print("---|---|---", file=handle)
             for d in sorted(rows, key=itemgetter("value", "source")):
                 source = d["source"]
                 if "url" in d:
                     source = f"[{source}]({d['url']})"
                 value = d["value"]
-                print(f"{source} | {value}", file=handle)
+                params = formatParams(d.get("params"))
+                print(f"{source} | {params} | {value}", file=handle)
 
 def loadDB(path):
     with open(path, "r") as handle: d = json.load(handle)
