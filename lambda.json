@@ -45,7 +45,7 @@
     "params": "fast_growing_and_conjectures/perfect.lam"
   },
   {
-    "problem": "Interp(BLC2)",
+    "problem": "Interp(BLC)",
     "source": "Felgenhauer & Tromp 2011",
     "url": "https://github.com/tromp/AIT/",
     "strategy": "blc",
