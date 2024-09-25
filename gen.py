@@ -28,7 +28,8 @@ def splitLabel(s):
 def synthRows(db):
     problems = defaultdict(list)
     for problem, rows in db.items():
-        if problem.startswith("Interp("): problems["Universality"].extend(rows)
+        if problem.startswith("Interp("): problems["Turing regime (universality)"].extend(rows)
+        elif problem.startswith("Metainterp("): problems["Futamura regime (specializing)"].extend(rows)
         else: problems[problem] = rows
     return problems
 

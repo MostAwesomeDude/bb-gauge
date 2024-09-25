@@ -76,6 +76,21 @@
           url = "http://brainfuck.org/utm.b";
           sha256 = "1p7dk6fbn29rn9s35rkhcrggfg136dy5rkc89f0960al6ij7y5bx";
         };
+        bf-meta = pkgs.stdenv.mkDerivation {
+          name = "meta.bf";
+          version = "2023";
+          src = pkgs.fetchFromGitHub {
+            owner = "bf-enterprise-solutions";
+            repo = "meta.bf";
+            rev = "e42de471a8434beb055e1590c259131c225eb423";
+            sha256 = "sha256-iOB/1UMNiqQ8Hibjo/7B3HaQNiYdQFB5Gtr+DvCSkqE=";
+          };
+          nativeBuildInputs = [ pkgs.m4 ];
+          installPhase = ''
+            mkdir -p $out/share/
+            cp meta.*.bf $out/share/
+          '';
+        };
         bf = rpypkgs.packages.${system}.bf;
         # XXX pypy doesn't work with pyparsing?
         py = pkgs.python3.withPackages (ps: [ ps.pyparsing ]);
@@ -98,6 +113,7 @@
               | sed '/^ *!/d' > bf/erdos-lagarias.b
             cp ${bf-dbfi} bf/dbfi.b
             cp ${bf-utm} bf/utm.b
+            cp ${bf-meta}/share/meta.r.min.bf bf/meta.bf
             mkdir bf-clean/
             # Compress BF.
             for b in bf/*; do

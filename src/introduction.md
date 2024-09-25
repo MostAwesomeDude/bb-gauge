@@ -31,6 +31,21 @@ As a quick aside: the search for bounds on halting programs is known as the
 [busy beaver game](https://en.wikipedia.org/wiki/Busy_beaver), and so this
 book is naturally known as the **Busy Beaver Gauge**.
 
+## Presentation
+
+The bulk of this book dedicates a page per computational formalism. At the top
+of each page, various results are graphed for visual comparison on a one- or
+two-dimensional plot. Three regions are distinguished on each plot:
+
+* Known Values: regions where every program has been enumerated and the
+  Busy Beaver values have been calculated
+* Turing regime (universality): regions where some programs exhibit
+  Turing-completeness ([WP](https://en.wikipedia.org/wiki/Turing_completeness))
+  and universal behaviors
+* Futamura regime (specializing): regions where some programs implement
+  Futamura projections ([WP](https://en.wikipedia.org/wiki/Partial_evaluation))
+  and other partial evaluators
+
 ## Nuts & Bolts
 
 To make this whole concept useful, we choose machines and languages which are

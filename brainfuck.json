@@ -36,5 +36,10 @@
 		"source": "Cristofani",
 		"strategy": "brainfuck",
 		"params": "utm.b"
+	},{
+		"problem": "Metainterp(BF)",
+		"source": "Bologov 2023",
+		"strategy": "brainfuck",
+		"params": "meta.bf"
 	}]
 }
