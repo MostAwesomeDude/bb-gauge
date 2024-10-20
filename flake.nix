@@ -68,6 +68,10 @@
 
           meta.license = pkgs.lib.licenses.gpl2Plus;
         };
+        bf-bcl = builtins.fetchurl {
+          url = "https://paste.debian.net/plain/1332858/";
+          sha256 = "0yhqfsgdsa8vlkk7agmr2ri1vvdjmcp44vbclxg259q48chk6qnn";
+        };
         bf-dbfi = builtins.fetchurl {
           url = "http://brainfuck.org/dbfi.b";
           sha256 = "19zixvz4axfcjyfss5hirahng5ksnrsmpdibacc5g6wgi10amii5";
@@ -111,6 +115,7 @@
               | sed '/^ *!/d' > bf/laver.b
             ${bfmacro}/bin/bfmacro -na bfm/stack.bfm bfm/erdos-lagarias.bfm \
               | sed '/^ *!/d' > bf/erdos-lagarias.b
+            cp ${bf-bcl} bf/bcl.bf
             cp ${bf-dbfi} bf/dbfi.b
             cp ${bf-utm} bf/utm.b
             cp ${bf-meta}/share/meta.r.min.bf bf/meta.bf

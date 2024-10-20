@@ -41,5 +41,10 @@
 		"source": "Bologov 2023",
 		"strategy": "brainfuck",
 		"params": "meta.bf"
+	},{
+		"problem": "Interp(BCL)",
+		"source": "Felgenhauer 2024",
+		"strategy": "brainfuck",
+		"params": "bcl.bf"
 	}]
 }
