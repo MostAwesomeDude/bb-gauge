@@ -123,6 +123,7 @@
             # Compress BF.
             for b in bf/*; do
               t="bf-clean/$(basename $b)"
+              echo "Cleaning $b"
               ${bf}/bin/bf -o $b >$t
             done
 

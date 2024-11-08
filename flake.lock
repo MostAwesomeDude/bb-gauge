@@ -51,11 +51,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1729472613,
-        "narHash": "sha256-m0wgH8fAigw55xF78CF1hs8gCxYLxzp/ew31zG/dsDc=",
+        "lastModified": 1731109503,
+        "narHash": "sha256-0230vj1GFk+wfqldbqIjsDjO86soZKjV04eMKtUN9bE=",
         "owner": "rpypkgs",
         "repo": "rpypkgs",
-        "rev": "659c8a26d428a1e04fdff614b28e464a50d4647b",
+        "rev": "d439d225b79ac82e009a5f1cd1c670f00356464c",
         "type": "github"
       },
       "original": {
