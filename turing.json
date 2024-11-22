@@ -9,6 +9,12 @@
 		"params": [27, 2]
 	},{
 		"problem": "Goldbach conjecture",
+		"source": "Leng 2024",
+		"url": "https://github.com/lengyijun/goldbach_tm",
+		"strategy": "params",
+		"params": [25, 2]
+	},{
+		"problem": "Goldbach conjecture",
 		"source": "Showalter 2016",
 		"url": "https://gist.github.com/jms137/cbb66fb58dde067b0bece12873fadc76",
 		"strategy": "params",
