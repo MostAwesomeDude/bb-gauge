@@ -5,12 +5,11 @@ jobs:
     name: Build Nix flake
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       - uses: DeterminateSystems/flake-checker-action@v4
         with:
           check-outdated: false
       - uses: cachix/install-nix-action@v27
-      - uses: DeterminateSystems/magic-nix-cache-action@v7
       - uses: cachix/cachix-action@v15
         with:
           name: rpypkgs
