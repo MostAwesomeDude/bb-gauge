@@ -18,7 +18,8 @@ proofs](https://ncatlab.org/nlab/show/proofs+as+programs).) However, if there
 is no proof, then the program will run forever, and [whether a program will
 halt](https://en.wikipedia.org/wiki/Halting_problem) is itself uncomputable
 ([WP](https://en.wikipedia.org/wiki/Computable_function),
-[nLab](https://ncatlab.org/nlab/show/computability)).
+[nLab](https://ncatlab.org/nlab/show/computability),
+[esolangs](https://esolangs.org/wiki/Computable)).
 
 What use is a program that might run forever? On its own, not much. However,
 this living book presents a collection of several different programs, collated

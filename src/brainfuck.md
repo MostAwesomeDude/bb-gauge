@@ -1,8 +1,9 @@
 # Brainfuck
 
 This article covers the Busy Brain Beaver function BBB(n) counting the maximum
-number of steps taken by non-interactive right-unbounded Brainfuck programs of
-length n.
+number of steps taken by non-interactive right-unbounded Brainfuck
+([WP](https://en.wikipedia.org/wiki/Brainfuck),
+[esolangs](https://esolangs.org/wiki/Brainfuck)) programs of length n.
 
 ## Definition
 
