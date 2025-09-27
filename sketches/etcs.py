@@ -4,6 +4,7 @@ import time; before = time.perf_counter()
 theorems = [
     ("0", "0"), # id_0
     ("1", "1"), # id_1
+    ("1", ("s", "1", "1")), # t
     ("N", "N"), # id_N
     ("1", "N"), # zero
 ]
@@ -62,6 +63,10 @@ def uncurry(x, y):
     if y[0] != "f": return
     find(("p", x, y[1]), y[2])
 
+def nno(x, y, z, w):
+    if x != "1" or y != z != w: return
+    find("N", y)
+
 def choice(x, y, z, w):
     if x != "1" or y != z: return
     find(w, z)
@@ -78,7 +83,7 @@ while rounds:
         for j in range(l):
             x, y = theorems[i]
             z, w = theorems[j]
-            comp(x, y, z, w); pair(x, y, z, w); case(x, y, z, w); choice(x, y, z, w)
+            comp(x, y, z, w); pair(x, y, z, w); case(x, y, z, w); nno(x, y, z, w); choice(x, y, z, w)
     print("Ending round with", len(theorems), "signatures")
 after = time.perf_counter(); elapsed = after - before
 print("Took", elapsed, "seconds;", int(len(theorems) / elapsed), "theorems/s")

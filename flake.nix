@@ -16,6 +16,34 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
+        coq-bb5 = pkgs.stdenv.mkDerivation {
+          name = "coq-bb5";
+          version = "1.0.0";
+
+          src = pkgs.fetchFromGitHub {
+            owner = "ccz181078";
+            repo = "Coq-BB5";
+            rev = "b295161e830cfb0698e6eff667afce8917ca1423";
+            sha256 = "sha256-O4TpmXUxryD20zF9+yCDKqUeNCH4Xe14i4urUiPok2E=";
+          };
+
+          nativeBuildInputs = [ pkgs.coq_8_20 ];
+
+          buildPhase = ''
+            make -C CoqBB5/BB2
+            make -C CoqBB5/BB2x3
+            make -C CoqBB5/BB2x4
+            make -C CoqBB5/BB3
+            make -C CoqBB5/BB4
+            make -C BusyCoq
+            make -C CoqBB5/BB5
+          '';
+
+          installPhase = ''
+            mkdir $out/ -p
+            touch $out/proof.success
+          '';
+        };
         mm-tm = pkgs.fetchFromGitHub {
           owner = "MostAwesomeDude";
           repo = "metamath-turing-machines";
@@ -154,7 +182,10 @@
           '';
         };
       in {
-        packages.default = bb-gauge;
+        packages = {
+          inherit coq-bb5;
+          default = bb-gauge;
+        };
         devShells.default = pkgs.mkShell {
           name = "bb-gauge-env";
           packages = bb-gauge.buildInputs ++ [
