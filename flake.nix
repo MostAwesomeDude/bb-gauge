@@ -16,6 +16,9 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
+        coq = pkgs.callPackage ./coq.nix {
+          ocamlPackages_4_14 = pkgs.ocaml-ng.ocamlPackages_4_14;
+        };
         coq-bb5 = pkgs.stdenv.mkDerivation {
           name = "coq-bb5";
           version = "1.0.0";
@@ -27,16 +30,15 @@
             sha256 = "sha256-O4TpmXUxryD20zF9+yCDKqUeNCH4Xe14i4urUiPok2E=";
           };
 
-          nativeBuildInputs = [ pkgs.coq_8_20 ];
+          nativeBuildInputs = [ coq coq.ocaml ];
 
           buildPhase = ''
-            make -C CoqBB5/BB2
-            make -C CoqBB5/BB2x3
-            make -C CoqBB5/BB2x4
-            make -C CoqBB5/BB3
-            make -C CoqBB5/BB4
-            make -C BusyCoq
-            make -C CoqBB5/BB5
+            for d in CoqBB5/BB2 CoqBB5/BB2x3 CoqBB5/BB2x4 CoqBB5/BB3 CoqBB5/BB4 BusyCoq CoqBB5/BB5; do
+              pushd $d
+                coq_makefile -f _CoqProject -o Makefile
+                make -j $NIX_BUILD_CORES
+              popd
+            done
           '';
 
           installPhase = ''
