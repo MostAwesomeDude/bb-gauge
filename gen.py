@@ -111,6 +111,7 @@ class Canvas:
         return cls(ET.Element("svg", attrib={
             "version": "1.1", "width": str(width), "height": str(height),
             "xmlns": "http://www.w3.org/2000/svg",
+            "style": "background-color: white;",
         }))
 
     def finish(self, path):
